@@ -1,7 +1,7 @@
 UWDOEM/Person
 =============
 
-Smoothly poll the university's Person Web Service and Student Web Service to aggregate data on a given affiliate, using X.509 certificate authentication.
+Smoothly poll the University of Washington's Person Web Service and Student Web Service to aggregate data on a given affiliate, using X.509 certificate authentication.
 
 For example:
 
