@@ -2,7 +2,7 @@
   "name": "uwdoem/person",
   "version": "0.1.1",
   "dist": {
-    "url": "git@bitbucket.org:UWDOEM/person.git",
+    "url": "git@github.com:UWEnrollmentManagement/Person.git",
     "type": "vcs"
   },
   "autoload": {
