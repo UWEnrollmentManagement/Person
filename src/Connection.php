@@ -83,7 +83,7 @@ class Connection {
      * @param string[] $params Array of query parameter $key=>$value pairs
      * @return mixed The server's response
      */
-    function execGET($url, $params = []) {
+    public function execGET($url, $params = []) {
         // Build the query from the parameters
         $url .= '?' . http_build_query($params);
 
@@ -102,7 +102,7 @@ class Connection {
      * @param string[] $params Array of POST parameter $key=>$value pairs
      * @return mixed The server's response
      */
-    function execPOST($url, $params = []) {
+    public function execPOST($url, $params = []) {
         // Set request options
         curl_setopt_array($this->curl, array(
             CURLOPT_URL => $url,

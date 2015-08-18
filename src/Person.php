@@ -15,22 +15,52 @@ class Person {
 
     protected static $AFFILIATION_TYPE = "person";
 
+    /**
+     * Sets a value on your LOCAL COPY of the person.
+     *
+     * SWS/PWS do not support UPDATING person/student models.
+     * @param $key
+     * @param $value
+     */
     public function setAttr($key, $value) {
         $this->attrs[$key] = $value;
     }
 
+    /**
+     * Gets a value from your local copy of the person.
+     *
+     * @param $key
+     * @return mixed
+     */
     public function getAttr($key) {
         return $this->attrs[$key];
     }
 
+    /**
+     * Returns whether the given person has the given affiliation.
+     *
+     * @param $affiliation
+     * @return bool
+     */
     public function hasAffiliation($affiliation) {
         return in_array($affiliation, $this->_affiliations);
     }
 
+    /**
+     * Queries PWS/SWS to generate a Person, given a UWNetID.
+     * @param $uwnetid
+     * @return null|Person
+     */
     public static function fromUWNetID($uwnetid) {
         return static::fromSimpleIdentifier($uwnetid);
     }
 
+    /**
+     * Queries PWS/SWS to generate a Person, given a UWRegID.
+     *
+     * @param $regid
+     * @return null|Person
+     */
     public static function fromUWRegID($uwregid) {
         return static::fromSimpleIdentifier($uwregid);
     }
@@ -50,6 +80,16 @@ class Person {
 
     }
 
+    /**
+     * Queries PWS/SWS to generate a Person, given an identifier type and value.
+     *
+     * Identifier type must be one of ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"]
+     *
+     * @param string $identifierKey
+     * @param string $identifierValue
+     * @return null|Person
+     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"]
+     */
     public static function fromIdentifier($identifierKey, $identifierValue) {
         $validIdentifierKeys = ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"];
         if (!in_array($identifierKey,$validIdentifierKeys)) {
@@ -69,6 +109,15 @@ class Person {
         }
     }
 
+    /**
+     * Casts one subclass of Person into another.
+     *
+     * Ex:
+     * $p = Person::fromUWNetId($uwnetid); // $p is a Person
+     * $p = Employee::fromPerson($p); // $p is now cast into an employee
+     * @param Person $oldPerson
+     * @return Person
+     */
     public static function fromPerson(Person $oldPerson) {
         $newPerson = new static();
         return static::fill($newPerson,  $oldPerson->_raw);
