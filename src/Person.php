@@ -44,6 +44,21 @@ class Person {
         return static::fill($person,  static::parse($resp));
     }
 
+    public static function fromIdentifier($identifierKey, $identifierValue) {
+        $validIdentifierKeys = ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"];
+        if (!in_array($identifierKey,$validIdentifierKeys)) {
+            throw new \Exception("Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "].");
+        }
+
+        $resp = static::getConn()->execGET(
+            "https://ws.admin.washington.edu/identity/v1/person.json?$identifierKey=$identifierValue"
+        );
+        $resp = static::parse($resp);
+
+        $uwnetid = $resp["Current"]["UWNetID"];
+        return static::fromSimpleIdentifier($uwnetid);
+    }
+
     public static function fromPerson(Person $oldPerson) {
         $newPerson = new static();
         return static::fill($newPerson,  $oldPerson->_raw);

@@ -11,13 +11,21 @@ class MockConnectionInstance {
     public $lastUrl;
     public $lastParams;
 
-    function execGET($url, $params = []) {
-        $this->lastUrl = $url;
-        $this->lastParams = $params;
-        return file_get_contents(getcwd() . "/tests/StaffStudentPerson.json");
+    protected function makeSlug($url) {
+        $url = str_replace(["https://ws.admin.washington.edu/identity/v1/"], [""], $url);
+        $url = str_replace(["?", "/", ".", "="], ["-", "-", "-", "-"], $url);
+
+        return $url;
     }
 
-    function execPOST($url, $params = []) {
+    public function execGET($url, $params = []) {
+        $this->lastUrl = $url;
+        $this->lastParams = $params;
+
+        return file_get_contents(getcwd() . "/tests/responses/{$this->makeSlug($url)}.json");
+    }
+
+    public function execPOST($url, $params = []) {
         $this->lastUrl = $url;
         $this->lastParams = $params;
         return file_get_contents(getcwd() . "/tests/StaffStudentPerson.json");

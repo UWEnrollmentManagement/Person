@@ -52,8 +52,14 @@ class PersonTest extends PHPUnit_Framework_TestCase
 
         $p = MockPerson::fromUWNetID($uwnetid);
         $s = MockStudent::fromPerson($p);
-        
+
         $this->assertEquals($s->getAttr("StudentNumber"), "1033334");
+    }
+
+    public function testIdentifierSearch() {
+        $p = MockPerson::fromIdentifier("employeeid", "123456789");
+
+        $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
     }
 
 }
