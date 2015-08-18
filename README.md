@@ -2,7 +2,7 @@
 UWDOEM/Person
 =============
 
-Smoothly poll the University of Washington's Person Web Service and Student Web Service to aggregate data on a given affiliate, using X.509 certificate authentication.
+Smoothly poll the University of Washington's [Person Web Service](https://wiki.cac.washington.edu/display/pws/Person+Web+Service) and [Student Web Service](https://wiki.cac.washington.edu/display/SWS/Student+Web+Service) to aggregate data on a given affiliate, using X.509 certificate authentication.
 
 For example:
 
@@ -45,11 +45,6 @@ This library is published on packagist. To install using Composer, add the `"uwd
 
 Of course, if you're not using Composer then you can download the repository using the buttons at right.
 
-How it Works
-============
-
-Instructions to follow.
-
 Use
 ===
 
@@ -60,6 +55,8 @@ Compatibility
 =============
 
 * PHP5
+* Person Web Service v1
+* Student Web Service v5
 
 
 Todo
