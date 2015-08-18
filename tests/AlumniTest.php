@@ -1,6 +1,6 @@
 <?php
 
-require_once "mocks.php";
+require_once getcwd() . "/tests/mocks.php";
 
 class AlumniTest extends PHPUnit_Framework_TestCase
 {
