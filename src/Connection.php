@@ -23,7 +23,7 @@ class Connection {
         if (empty(self::$instance)) {
             throw new \Exception(
                 'Connection::getInstance() called before initialization. ' .
-                'Call Connection::createInstance(string $sslkey, string $sslcert, string $sslkeypasswd) before ::getInstance().'
+                'Call Connection::createInstance($sslkey, $sslcert, $sslkeypasswd) before ::getInstance().'
             );
         }
         return self::$instance;
@@ -35,7 +35,7 @@ class Connection {
      * @param string|null $sslkeypasswd (Optional) Password for your private key file.
      * @throws \Exception if you attempt to intialize the connection more than one time in a page-load via ::createInstance
      */
-    public static function createInstance(string $sslkey, string $sslcert, string $sslkeypasswd = null) {
+    public static function createInstance($sslkey, $sslcert, $sslkeypasswd = null) {
         if (!empty(self::$instance)) {
             throw new \Exception(
                 'Connection::createInstance() called more than once. ' .
@@ -45,7 +45,7 @@ class Connection {
         self::$instance = new Connection($sslkey, $sslcert, $sslkeypasswd);
     }
 
-    private function __construct(string $sslkey, string $sslcert, string $sslkeypasswd = null) {
+    private function __construct($sslkey, $sslcert, $sslkeypasswd = null) {
 
         if (!file_exists($sslkey)) {
             throw new \Exception("No such file found for SSL key at $sslkey.");
@@ -83,7 +83,7 @@ class Connection {
      * @param string[] $params Array of query parameter $key=>$value pairs
      * @return mixed The server's response
      */
-    function execGET(string $url, $params = []) {
+    function execGET($url, $params = []) {
         // Build the query from the parameters
         $url .= '?' . http_build_query($params);
 
@@ -102,7 +102,7 @@ class Connection {
      * @param string[] $params Array of POST parameter $key=>$value pairs
      * @return mixed The server's response
      */
-    function execPOST(string $url, $params = []) {
+    function execPOST($url, $params = []) {
         // Set request options
         curl_setopt_array($this->curl, array(
             CURLOPT_URL => $url,
