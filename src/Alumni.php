@@ -9,6 +9,8 @@ namespace UWDOEM\Person;
  */
 class Alumni extends Person {
 
+    protected static $AFFILIATION_TYPE = "student";
+
     protected static function fill(Person $person, array $attrs) {
         $attrs = array_merge(
             $attrs,

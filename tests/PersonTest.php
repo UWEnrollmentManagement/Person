@@ -34,4 +34,26 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertContains($uwregid, $myMockConnectionInstance->lastUrl);
     }
 
+    public function testHasAffiliation() {
+        $uwnetid = "javerage";
+        $p = MockPerson::fromUWNetID($uwnetid);
+
+        $this->assertTrue($p->hasAffiliation("member"));
+        $this->assertTrue($p->hasAffiliation("student"));
+        $this->assertTrue($p->hasAffiliation("alum"));
+        $this->assertTrue($p->hasAffiliation("staff"));
+        $this->assertTrue($p->hasAffiliation("employee"));
+
+        $this->assertFalse($p->hasAffiliation("sdfasdfjkl;sdfa"));
+    }
+
+    public function testClassCasting() {
+        $uwnetid = "javerage";
+
+        $p = MockPerson::fromUWNetID($uwnetid);
+        $s = MockStudent::fromPerson($p);
+        
+        $this->assertEquals($s->getAttr("StudentNumber"), "1033334");
+    }
+
 }
