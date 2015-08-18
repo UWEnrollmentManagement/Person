@@ -15,23 +15,19 @@ class PersonTest extends PHPUnit_Framework_TestCase
     }
 
     public function testFromUWNetID() {
-        $uwnetid = "javerage";
-
-        $p = MockPerson::fromUWNetID($uwnetid);
+        $p = MockPerson::fromUWNetID("javerage");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
-        global $myMockConnectionInstance;
-        $this->assertContains($uwnetid, $myMockConnectionInstance->lastUrl);
+        $p = $p = MockPerson::fromUWNetID("nosuchuser");
+        $this->assertNull($p);
     }
 
     public function testFromUWRegID() {
-        $uwregid = "9136CCB8F66711D5BE060004AC494FFE";
-
-        $p = MockPerson::fromUWNetID($uwregid);
+        $p = MockPerson::fromUWRegID("9136CCB8F66711D5BE060004AC494FFE");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
-        global $myMockConnectionInstance;
-        $this->assertContains($uwregid, $myMockConnectionInstance->lastUrl);
+        $p = $p = MockPerson::fromUWRegID("nosuchuser");
+        $this->assertNull($p);
     }
 
     public function testHasAffiliation() {
@@ -58,8 +54,10 @@ class PersonTest extends PHPUnit_Framework_TestCase
 
     public function testIdentifierSearch() {
         $p = MockPerson::fromIdentifier("employeeid", "123456789");
-
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
+
+        $p = MockPerson::fromIdentifier("uwnetid", "nosuchuser");
+        $this->assertNull($p);
     }
 
 }

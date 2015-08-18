@@ -39,9 +39,15 @@ class Person {
         $resp = static::getConn()->execGET(
             "https://ws.admin.washington.edu/identity/v1/person/$identifier/full.json"
         );
+        $resp = static::parse($resp);
 
-        $person = new static();
-        return static::fill($person,  static::parse($resp));
+        if (array_key_exists("StatusCode", $resp) && $resp["StatusCode"] == "404") {
+            return null;
+        } else {
+            $person = new static();
+            return static::fill($person,  $resp);
+        }
+
     }
 
     public static function fromIdentifier($identifierKey, $identifierValue) {
@@ -55,8 +61,12 @@ class Person {
         );
         $resp = static::parse($resp);
 
-        $uwnetid = $resp["Current"]["UWNetID"];
-        return static::fromSimpleIdentifier($uwnetid);
+        if (sizeof($resp["Persons"]) == 0) {
+            return null;
+        } else {
+            $uwnetid = $resp["Current"]["UWNetID"];
+            return static::fromSimpleIdentifier($uwnetid);
+        }
     }
 
     public static function fromPerson(Person $oldPerson) {
