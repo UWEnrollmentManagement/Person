@@ -1,3 +1,4 @@
+
 UWDOEM/Person
 =============
 
@@ -32,7 +33,17 @@ For example:
 Installation
 ===============
 
-This library will be published to packagist shortly, at which point you will be able to install it via composer. Directions to follow.
+This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.1.*"` line to your "require" dependencies:
+
+```
+{
+    "require": {
+        "uwdoem/person": "0.1.*"
+    }
+}
+```
+
+Of course, if you're not using Composer then you can download the repository using the buttons at right.
 
 How it Works
 ============
