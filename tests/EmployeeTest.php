@@ -1,6 +1,6 @@
 <?php
 
-require_once "tests/mocks.php";
+require_once "mocks.php";
 
 class EmployeeTest extends PHPUnit_Framework_TestCase
 {

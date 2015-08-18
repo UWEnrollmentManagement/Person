@@ -1,6 +1,6 @@
 <?php
 
-require_once "tests/mocks.php";
+require_once "mocks.php";
 
 class StudentTest extends PHPUnit_Framework_TestCase
 {
