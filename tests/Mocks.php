@@ -2,6 +2,8 @@
 
 use UWDOEM\Person\Person;
 use UWDOEM\Person\Student;
+use UWDOEM\Person\Employee;
+use UWDOEM\Person\Alumni;
 
 
 class MockConnectionInstance {
@@ -37,5 +39,13 @@ class MockPerson extends Person {
 }
 
 class MockStudent extends Student {
+    use MockPersonTrait;
+}
+
+class MockEmployee extends Employee {
+    use MockPersonTrait;
+}
+
+class MockAlumni extends Alumni {
     use MockPersonTrait;
 }

@@ -22,6 +22,9 @@
   "UWRegID": "9136CCB8F66711D5BE060004AC494FFE",
   "WhitepagesPublish": false,
   "PersonAffiliations": {
+    "AlumPersonAffiliation": {
+      "DevelopmentID": "123456789"
+    },
     "EmployeePersonAffiliation": {
       "EmployeeID": "123456789",
       "EmployeeWhitePages": {
