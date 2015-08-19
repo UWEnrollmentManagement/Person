@@ -2,7 +2,7 @@
 UWDOEM/Person
 =============
 
-Smoothly poll the University of Washington's [Person Web Service](https://wiki.cac.washington.edu/display/pws/Person+Web+Service) and [Student Web Service](https://wiki.cac.washington.edu/display/SWS/Student+Web+Service) to aggregate data on a given affiliate, using X.509 certificate authentication.
+Smoothly poll the University of Washington's [Person Web Service](https://wiki.cac.washington.edu/display/pws/Person+Web+Service) (PWS) and [Student Web Service](https://wiki.cac.washington.edu/display/SWS/Student+Web+Service) (SWS) to aggregate data on a given affiliate, using X.509 certificate authentication.
 
 For example:
 
