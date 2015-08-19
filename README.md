@@ -227,9 +227,7 @@ Compatibility
 Todo
 ====
 
-* Poll the Student Web Service for more information on students, as appropriate.
-* Infer well-capitalized DisplayFirstName, DisplayLastName, DisplayMI, DisplayMiddleName attributes.
-* Figure out how to handle a client who has access only to PWS and not SWS, or vice-versa.
+See GitHub [issue tracker](https://github.com/UWEnrollmentManagement/Person/issues/).
 
 License
 ====
@@ -239,4 +237,4 @@ Employees of the University of Washington may use this code in any capacity, wit
 Getting Involved
 ================
 
-Feel free to open pull requests or issues. GitHub is the canonical location of this project.
+Feel free to open pull requests or issues. [GitHub](https://github.com/UWEnrollmentManagement/Person) is the canonical location of this project.
