@@ -8,7 +8,7 @@ For example:
 
 ```
     // Intialize the connection
-    Connection::createInstance($my_ssl_key_path, $my_ssl_cert_path, $my_ssl_key_passwd);
+    Connection::createInstance("/path/to/my/private.key", "/path/to/my/public_cert.pem", "myprivatekeypassword");
     
     // Query the web services
     $student = Student::fromStudentNumber("1033334");
@@ -47,6 +47,8 @@ Of course, if you're not using Composer then you can download the repository usi
 
 Use
 ===
+
+This client library provides a `Connection` class and four data-container classes: `Person`, `Student`, `Employee`, and `Alumni`.
 
 If you have not already done so, follow PWS's instructions on [getting access to PWS](https://wiki.cac.washington.edu/display/pws/Getting+Access+to+PWS). A similar set of steps will allow you to [gain access to SWS](https://wiki.cac.washington.edu/display/SWS/Getting+Access+to+SWS). You'll need to place both the private private key you created and also the university-signed certificate on your web server, with read-accessibility for your web-server process.
 
@@ -94,6 +96,89 @@ The following methods may be used to query the database:
     
     // Available only to Alumni
     $alumni = Alumni::fromDevelopmentID($developmentid);
+```
+
+You can cast between classes each of the container classes' `::fromPerson` method:
+
+```
+    $person = Person::fromUWNetID($uwnetid);
+    
+    // Cast the Person object into a Student
+    $person = Student::fromPerson($person);
+```
+
+The `::hasAffiliation` method can tell you whether a given person is a student, employee, and/or alumni:
+
+```
+    $person = Person::fromUWNetID($uwnetid);
+    
+    // The ::hasAffiliation method check is useful, but not required:
+    if ($person->hasAffiliation("employee") {
+        $person = Employee::fromPerson($person);
+    }
+```
+
+Use `::getAttr` to retrieve an attribute from a person:
+
+```
+    $person = Person::fromUWNetID($uwnetid);
+    $displayName = $person->getAttr("DisplayName");
+    
+    $person = Student::fromPerson($person);
+    $academicDepartment = $person->getAttr("Department1");
+
+```
+
+Exposed Attributes
+==================
+
+The container classes expose the following attributes, corresponding to those descibed in [this PWS glossary](https://wiki.cac.washington.edu/display/pws/PWS+Attribute+Glossary):
+
+```
+    Exposed by all classes:
+        "DisplayName"
+        "IsTestEntity"
+        "RegisteredFirstMiddleName"
+        "RegisteredName"
+        "RegisteredSurname"
+        "UIDNumber"
+        "UWNetID"
+        "UWRegID"
+        "WhitepagesPublish"
+        
+    Exposed only by Employee:
+        "EmployeeID"
+        "Address1"
+        "Address2"
+        "Department1"
+        "Department2"
+        "Email1"
+        "Email2"
+        "Fax"
+        "Name"
+        "Phone1"
+        "Phone2"
+        "PublishInDirectory"
+        "Title1"
+        "Title2"
+        "TouchDial"
+        "VoiceMail"
+    
+    Exposed only by Student:
+        "StudentNumber"
+        "StudentSystemKey"
+        "Class"
+        "Department1"
+        "Department2"
+        "Department3"
+        "Email"
+        "Name"
+        "Phone"
+        "PublishInDirectory"
+        
+    Exposed only by Alumni:
+        "DevelopmentID"
+
 ```
 
 Compatibility
