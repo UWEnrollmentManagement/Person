@@ -192,12 +192,12 @@ Compatibility
 * Person Web Service v1
 * Student Web Service v5
 
-
 Todo
 ====
 
 * Poll the Student Web Service for more information on students, as appropriate.
 * Infer well-capitalized DisplayFirstName, DisplayLastName, DisplayMI, DisplayMiddleName attributes.
+* Figure out how to handle a client who has access only to PWS and not SWS, or vice-versa.
 
 License
 ====
