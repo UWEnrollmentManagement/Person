@@ -92,7 +92,7 @@ class Connection {
             CURLOPT_URL => $url,
         ));
 
-        return curl_exec($this->curl);
+        return $this->exec();
     }
 
     /**
@@ -111,12 +111,22 @@ class Connection {
         ));
 
         // Execute the request
-        $resp = curl_exec($this->curl);
+        $resp = $this->exec();
 
         // Unset POST related options
         curl_setopt_array($this->curl, array(
             CURLOPT_POST => false,
         ));
+
+        return $resp;
+    }
+
+    protected function exec() {
+        $resp = curl_exec($this->curl);
+
+        if(curl_errno($this->curl)){
+            throw new \Exception('Request Error:' . curl_error($this->curl));
+        }
 
         return $resp;
     }
