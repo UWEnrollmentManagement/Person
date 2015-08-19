@@ -47,6 +47,15 @@ class Person {
     }
 
     /**
+     * Returns an arry of the affiliate's attributes.
+     *
+     * @return array
+     */
+    public function getAttrs() {
+        return $this->attrs;
+    }
+
+    /**
      * Queries PWS/SWS to generate a Person, given a UWNetID.
      * @param $uwnetid
      * @return null|Person
@@ -77,7 +86,6 @@ class Person {
             $person = new static();
             return static::fill($person,  $resp);
         }
-
     }
 
     /**
