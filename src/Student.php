@@ -20,4 +20,8 @@ class Student extends Person {
         return parent::fill($person, $attrs);
     }
 
+    public static function fromStudentNumber($studentNumber) {
+        return static::fromIdentifier("studentnumber", $studentNumber);
+    }
+
 }

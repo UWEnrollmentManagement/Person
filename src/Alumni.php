@@ -19,4 +19,8 @@ class Alumni extends Person {
         return parent::fill($person, $attrs);
     }
 
+    public static function fromDevelopmentID($developmentID) {
+        return static::fromIdentifier("developmentid", $developmentID);
+    }
+
 }

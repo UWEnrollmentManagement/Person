@@ -4,8 +4,7 @@ require_once getcwd() . "/tests/mocks.php";
 
 class StudentTest extends PHPUnit_Framework_TestCase
 {
-    public function testStudentFill()
-    {
+    public function testStudentFill() {
         $uwnetid = "javerage";
 
         $p = MockStudent::fromUWNetID($uwnetid);
@@ -19,6 +18,11 @@ class StudentTest extends PHPUnit_Framework_TestCase
 
         global $myMockConnectionInstance;
         $this->assertContains($uwnetid, $myMockConnectionInstance->lastUrl);
+    }
+
+    public function testFromStudentNumber() {
+        $p = MockStudent::fromStudentNumber("1033334");
+        $this->assertEquals($p->getAttr("Department1"), "Non Matriculated");
     }
 
 }

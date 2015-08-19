@@ -20,4 +20,8 @@ class Employee extends Person {
         return parent::fill($person, $attrs);
     }
 
+    public static function fromEmployeeID($employeeID) {
+        return static::fromIdentifier("employeeid", $employeeID);
+    }
+
 }

@@ -4,8 +4,7 @@ require_once getcwd() . "/tests/mocks.php";
 
 class EmployeeTest extends PHPUnit_Framework_TestCase
 {
-    public function testEmployeeFill()
-    {
+    public function testEmployeeFill() {
         $uwnetid = "javerage";
 
         $p = MockEmployee::fromUWNetID($uwnetid);
@@ -16,6 +15,11 @@ class EmployeeTest extends PHPUnit_Framework_TestCase
 
         global $myMockConnectionInstance;
         $this->assertContains($uwnetid, $myMockConnectionInstance->lastUrl);
+    }
+
+    public function testFromEmployeeID() {
+        $p = MockEmployee::fromEmployeeID("123456789");
+        $this->assertEquals($p->getAttr("Department1"), "Student Financial Aid Office");
     }
 
 }
