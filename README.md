@@ -8,7 +8,11 @@ For example:
 
 ```
     // Intialize the connection
-    Connection::createInstance("/path/to/my/private.key", "/path/to/my/public_cert.pem", "myprivatekeypassword");
+    Connection::createInstance(
+        "/path/to/my/private.key",
+        "/path/to/my/public_cert.pem",
+        "myprivatekeypassword"
+    );
     
     // Query the web services
     $student = Student::fromStudentNumber("1033334");
