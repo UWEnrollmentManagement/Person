@@ -20,7 +20,7 @@ class Alumni extends Person {
     }
 
     public static function fromDevelopmentID($developmentID) {
-        return static::fromIdentifier("developmentid", $developmentID);
+        return static::fromIdentifier("development_id", $developmentID);
     }
 
 }

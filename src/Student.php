@@ -21,7 +21,7 @@ class Student extends Person {
     }
 
     public static function fromStudentNumber($studentNumber) {
-        return static::fromIdentifier("studentnumber", $studentNumber);
+        return static::fromIdentifier("student_number", $studentNumber);
     }
 
 }

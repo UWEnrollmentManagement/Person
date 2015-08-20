@@ -21,7 +21,7 @@ class Employee extends Person {
     }
 
     public static function fromEmployeeID($employeeID) {
-        return static::fromIdentifier("employeeid", $employeeID);
+        return static::fromIdentifier("employee_id", $employeeID);
     }
 
 }

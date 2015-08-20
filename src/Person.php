@@ -91,15 +91,15 @@ class Person {
     /**
      * Queries PWS/SWS to generate a Person, given an identifier type and value.
      *
-     * Identifier type must be one of ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"]
+     * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
      *
      * @param string $identifierKey
      * @param string $identifierValue
      * @return null|Person
-     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"]
+     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
      */
     public static function fromIdentifier($identifierKey, $identifierValue) {
-        $validIdentifierKeys = ["uwregid", "uwnetid", "employeeid", "studentnumber", "studentsystemkey", "developmentid"];
+        $validIdentifierKeys = ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"];
         if (!in_array($identifierKey,$validIdentifierKeys)) {
             throw new \Exception("Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "].");
         }
@@ -112,7 +112,7 @@ class Person {
         if (sizeof($resp["Persons"]) == 0) {
             return null;
         } else {
-            $uwnetid = $resp["Current"]["UWNetID"];
+            $uwnetid = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
             return static::fromSimpleIdentifier($uwnetid);
         }
     }
@@ -130,7 +130,7 @@ class Person {
         $newPerson = new static();
         return static::fill($newPerson,  $oldPerson->_raw);
     }
-    
+
     protected static function fill(Person $person, array $attrs) {
         $person->_raw = $attrs;
         $person->_affiliations = $attrs["EduPersonAffiliations"];

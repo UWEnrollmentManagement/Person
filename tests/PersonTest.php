@@ -53,7 +53,7 @@ class PersonTest extends PHPUnit_Framework_TestCase
     }
 
     public function testIdentifierSearch() {
-        $p = MockPerson::fromIdentifier("employeeid", "123456789");
+        $p = MockPerson::fromIdentifier("employee_id", "123456789");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
         $p = MockPerson::fromIdentifier("uwnetid", "nosuchuser");
