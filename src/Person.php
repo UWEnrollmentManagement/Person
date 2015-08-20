@@ -109,7 +109,7 @@ class Person {
         );
         $resp = static::parse($resp);
 
-        if (sizeof($resp["Persons"]) == 0) {
+        if (!array_key_exists("Persons", $resp) || sizeof($resp["Persons"]) == 0) {
             return null;
         } else {
             $uwnetid = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
