@@ -17,7 +17,7 @@ class Connection {
 
     /**
      * @return Connection Curl connection container.
-     * @throws \Exception if ::getInstance is called before connection is initialized via ::createInstance
+     * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
      */
     public static function getInstance() {
         if (empty(self::$instance)) {
@@ -85,7 +85,9 @@ class Connection {
      */
     public function execGET($url, $params = []) {
         // Build the query from the parameters
-        $url .= '?' . http_build_query($params);
+        if ($params) {
+            $url .= '?' . http_build_query($params);
+        }
 
         // Set request options
         curl_setopt_array($this->curl, array(
