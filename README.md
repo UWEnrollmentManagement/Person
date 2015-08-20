@@ -87,10 +87,10 @@ The following methods may be used to query the database:
     $person = Person::fromUWRegID($uwregid);
     $person = Person::fromIdentifier("uwregid", $uwregid);
     $person = Person::fromIdentifier("uwnetid", $uwnetid);
-    $person = Person::fromIdentifier("employeeid", $employeeid);
-    $person = Person::fromIdentifier("studentnumber", $studentnumber);
-    $person = Person::fromIdentifier("studentsystemkey", $studentsystemkey);
-    $person = Person::fromIdentifier("developmentid", $developmentid);
+    $person = Person::fromIdentifier("employee_id", $employeeid);
+    $person = Person::fromIdentifier("student_number", $studentnumber);
+    $person = Person::fromIdentifier("student_system_key", $studentsystemkey);
+    $person = Person::fromIdentifier("development_id", $developmentid);
     
     // Available only to Student
     $student = Student::fromStudentNumber($studentnumber);
