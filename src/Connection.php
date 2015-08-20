@@ -17,7 +17,7 @@ class Connection {
 
     /**
      * @return Connection Curl connection container.
-     * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
+     * @throws \Exception if ::getInstance is called before connection is initialized via ::createInstance
      */
     public static function getInstance() {
         if (empty(self::$instance)) {
