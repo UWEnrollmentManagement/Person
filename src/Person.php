@@ -76,7 +76,7 @@ class Person {
 
     protected static function fromSimpleIdentifier($identifier) {
         $resp = static::getConn()->execGET(
-            "https://ws.admin.washington.edu/identity/v1/person/$identifier/full.json"
+            "person/$identifier/full.json"
         );
         $resp = static::parse($resp);
 
@@ -105,7 +105,7 @@ class Person {
         }
 
         $resp = static::getConn()->execGET(
-            "https://ws.admin.washington.edu/identity/v1/person.json?$identifierKey=$identifierValue"
+            "person.json?$identifierKey=$identifierValue"
         );
         $resp = static::parse($resp);
 
@@ -145,7 +145,7 @@ class Person {
     }
 
     protected static function getConn() {
-        return Connection::getInstance();
+        return Connection::getPersonInstance();
     }
 
     protected static function parse($resp) {

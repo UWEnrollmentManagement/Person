@@ -11,22 +11,38 @@ namespace UWDOEM\Person;
  * @package UWDOEM\Person
  */
 class Connection {
-    private static $instance;
+    private static $personInstance;
+    private static $studentInstance;
 
+    private $baseurl;
     private $curl;
 
     /**
      * @return Connection Curl connection container.
      * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
      */
-    public static function getInstance() {
-        if (empty(self::$instance)) {
+    public static function getPersonInstance() {
+        if (empty(self::$personInstance)) {
             throw new \Exception(
                 'Connection::getInstance() called before initialization. ' .
                 'Call Connection::createInstance($sslkey, $sslcert, $sslkeypasswd) before ::getInstance().'
             );
         }
-        return self::$instance;
+        return self::$personInstance;
+    }
+
+    /**
+     * @return Connection Curl connection container.
+     * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
+     */
+    public static function getStudentInstance() {
+        if (empty(self::$studentInstance)) {
+            throw new \Exception(
+                'Connection::getInstance() called before initialization. ' .
+                'Call Connection::createInstance($sslkey, $sslcert, $sslkeypasswd) before ::getInstance().'
+            );
+        }
+        return self::$studentInstance;
     }
 
     /**
@@ -35,17 +51,21 @@ class Connection {
      * @param string|null $sslkeypasswd (Optional) Password for your private key file.
      * @throws \Exception if you attempt to intialize the connection more than one time in a page-load via ::createInstance
      */
-    public static function createInstance($sslkey, $sslcert, $sslkeypasswd = null) {
-        if (!empty(self::$instance)) {
+    public static function createInstance($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {
+        if (!empty(self::$personInstance)) {
             throw new \Exception(
                 'Connection::createInstance() called more than once. ' .
                 'Only one connection may be created. '
             );
         }
-        self::$instance = new Connection($sslkey, $sslcert, $sslkeypasswd);
+
+        self::$personInstance = new Connection($baseurl . "identity/v1/", $sslkey, $sslcert, $sslkeypasswd);
+        self::$studentInstance = new Connection($baseurl . "person/v5/", $sslkey, $sslcert, $sslkeypasswd);
     }
 
-    private function __construct($sslkey, $sslcert, $sslkeypasswd = null) {
+    private function __construct($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {
+
+        $this->baseurl = $baseurl;
 
         if (!file_exists($sslkey)) {
             throw new \Exception("No such file found for SSL key at $sslkey.");
@@ -84,6 +104,8 @@ class Connection {
      * @return mixed The server's response
      */
     public function execGET($url, $params = []) {
+        $url = $this->baseurl . $url;
+
         // Build the query from the parameters
         if ($params) {
             $url .= '?' . http_build_query($params);
@@ -105,6 +127,8 @@ class Connection {
      * @return mixed The server's response
      */
     public function execPOST($url, $params = []) {
+        $url = $this->baseurl . $url;
+
         // Set request options
         curl_setopt_array($this->curl, array(
             CURLOPT_URL => $url,
