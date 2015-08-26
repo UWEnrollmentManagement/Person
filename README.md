@@ -9,6 +9,7 @@ For example:
 ```
     // Intialize the connection
     Connection::createInstance(
+        "https://ws.admin.washington.edu/",
         "/path/to/my/private.key",
         "/path/to/my/public_cert.pem",
         "myprivatekeypassword"
@@ -33,6 +34,10 @@ For example:
 
 ```
 
+Notice
+======
+
+This is *not* an official library, endorsed or supported by any party who manages or owns information accessed via PWS or SWS. This library is *not* endorsed or supported by the University of Washington Department of Enrollment Management.
 
 Installation
 ===============
@@ -60,10 +65,17 @@ Before querying the web services, you must first initialize the connection by ca
 
 ```
     // Intialize the connection
-    Connection::createInstance($my_ssl_key_path, $my_ssl_cert_path, $my_ssl_key_passwd);
+    Connection::createInstance(
+        $base_service_url,
+        $my_ssl_key_path,
+        $my_ssl_cert_path,
+        $my_ssl_key_passwd
+    );
 ```
 
 The arguments `$my_ssl_key_path` and `$my_ssl_cert_path` correspond to the absolute locations of your private key and university-signed certificate. The `$my_ssl_key_password` argument is OPTIONAL and should be provided only if you have a password associated with the provided private key file.
+
+The argument `$base_service_url` corresponds to the base URL shared by UW web services. Currently this is either `"https://ws.admin.washington.edu/"` for the production-access web services, or `"https://wseval.s.uw.edu/"` for the testing/development-access web services.
 
 You may now issue queries against the web service:
 
