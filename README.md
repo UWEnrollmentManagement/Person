@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/UWEnrollmentManagement/Person.svg?branch=master)](https://travis-ci.org/UWEnrollmentManagement/Person)
+[![Build Status](https://travis-ci.org/UWEnrollmentManagement/Person.svg?branch=master)](https://travis-ci.org/UWEnrollmentManagement/Person) [![Latest Stable Version](https://poser.pugx.org/uwdoem/person/v/stable)](https://packagist.org/packages/uwdoem/person)
 
 UWDOEM/Person
 =============
