@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/UWEnrollmentManagement/Person.svg?branch=master)](https://travis-ci.org/UWEnrollmentManagement/Person)
 
 UWDOEM/Person
 =============
