@@ -34,6 +34,10 @@ For example:
 
 ```
 
+Notice
+======
+
+This is *not* an official library, endorsed or supported by any party who manages or owns information accessed via PWS or SWS. This library is *not* endorsed or supported by the University of Washington Department of Enrollment Management.
 
 Installation
 ===============
