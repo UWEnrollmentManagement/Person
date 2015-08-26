@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname(__FILE__) ."/../vendor/autoload.php";
-
 require_once dirname(__FILE__) ."/../src/Alumni.php";
 require_once dirname(__FILE__) ."/../src/Connection.php";
 require_once dirname(__FILE__) ."/../src/Employee.php";
