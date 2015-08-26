@@ -1,7 +1,5 @@
 <?php
 
-require_once getcwd() . "/tests/mocks.php";
-
 class EmployeeTest extends PHPUnit_Framework_TestCase
 {
     public function testEmployeeFill() {
