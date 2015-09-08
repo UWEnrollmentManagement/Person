@@ -30,13 +30,13 @@ class MockConnectionInstance {
         $this->lastUrl = $url;
         $this->lastParams = $params;
 
-        return file_get_contents(getcwd() . "/tests/responses/{$this->makeSlug($url)}.json");
+        return file_get_contents(getcwd() . "/responses/{$this->makeSlug($url)}.json");
     }
 
     public function execPOST($url, $params = []) {
         $this->lastUrl = $url;
         $this->lastParams = $params;
-        return file_get_contents(getcwd() . "/tests/StaffStudentPerson.json");
+        return file_get_contents(getcwd() . "/StaffStudentPerson.json");
     }
 }
 
