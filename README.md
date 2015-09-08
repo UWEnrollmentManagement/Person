@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/UWEnrollmentManagement/Person.svg?branch=master)](https://travis-ci.org/UWEnrollmentManagement/Person) [![Latest Stable Version](https://poser.pugx.org/uwdoem/person/v/stable)](https://packagist.org/packages/uwdoem/person)
+[![Build Status](https://travis-ci.org/UWEnrollmentManagement/Person.svg?branch=master)](https://travis-ci.org/UWEnrollmentManagement/Person)
+[![Code Climate](https://codeclimate.com/github/UWEnrollmentManagement/Person/badges/gpa.svg)](https://codeclimate.com/github/UWEnrollmentManagement/Person)
+[![Test Coverage](https://codeclimate.com/github/UWEnrollmentManagement/Person/badges/coverage.svg)](https://codeclimate.com/github/UWEnrollmentManagement/Person/coverage)
+[![Latest Stable Version](https://poser.pugx.org/uwdoem/person/v/stable)](https://packagist.org/packages/uwdoem/person)
 
 UWDOEM/Person
 =============
