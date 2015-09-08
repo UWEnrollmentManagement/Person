@@ -46,12 +46,12 @@ This is *not* an official library, endorsed or supported by any party who manage
 Installation
 ===============
 
-This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.1.*"` line to your "require" dependencies:
+This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.2.*"` line to your "require" dependencies:
 
 ```
 {
     "require": {
-        "uwdoem/person": "0.1.*"
+        "uwdoem/person": "0.2.*"
     }
 }
 ```
