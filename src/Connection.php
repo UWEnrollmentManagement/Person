@@ -11,24 +11,24 @@ namespace UWDOEM\Person;
  * @package UWDOEM\Person
  */
 class Connection {
-    private static $personInstance;
-    private static $studentInstance;
+    protected static $personInstance;
+    protected static $studentInstance;
 
-    private $baseurl;
-    private $curl;
+    protected $baseurl;
+    protected $curl;
 
     /**
-     * @return Connection Curl connection container.
+     * @return static Curl connection container.
      * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
      */
     public static function getPersonInstance() {
-        if (empty(self::$personInstance)) {
+        if (empty(static::$personInstance)) {
             throw new \Exception(
                 'Connection::getInstance() called before initialization. ' .
                 'Call Connection::createInstance($sslkey, $sslcert, $sslkeypasswd) before ::getInstance().'
             );
         }
-        return self::$personInstance;
+        return static::$personInstance;
     }
 
     /**
@@ -36,19 +36,19 @@ class Connection {
      * @throws \Exception if ::getInstance is called before connection is intialized via ::createInstance
      */
     public static function getStudentInstance() {
-        if (empty(self::$studentInstance)) {
+        if (empty(static::$studentInstance)) {
             throw new \Exception(
                 'Connection::getInstance() called before initialization. ' .
                 'Call Connection::createInstance($sslkey, $sslcert, $sslkeypasswd) before ::getInstance().'
             );
         }
-        return self::$studentInstance;
+        return static::$studentInstance;
     }
 
     /**
-     * @param string $sslkey Absolute path to the private SSL key used to authenticate your app to PWS or SWS.
+     * @param string $sslkey Absolute path to the protected SSL key used to authenticate your app to PWS or SWS.
      * @param string $sslcert Absolute path to the certificate file used to authenticate your app to PWS or SWS.
-     * @param string|null $sslkeypasswd (Optional) Password for your private key file.
+     * @param string|null $sslkeypasswd (Optional) Password for your protected key file.
      * @throws \Exception if you attempt to intialize the connection more than one time in a page-load via ::createInstance
      */
     public static function createInstance($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {
@@ -59,11 +59,11 @@ class Connection {
             );
         }
 
-        self::$personInstance = new Connection($baseurl . "identity/v1/", $sslkey, $sslcert, $sslkeypasswd);
-        self::$studentInstance = new Connection($baseurl . "person/v5/", $sslkey, $sslcert, $sslkeypasswd);
+        self::$personInstance = new static($baseurl . "identity/v1/", $sslkey, $sslcert, $sslkeypasswd);
+        self::$studentInstance = new static($baseurl . "person/v5/", $sslkey, $sslcert, $sslkeypasswd);
     }
 
-    private function __construct($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {
+    protected function __construct($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {
 
         $this->baseurl = $baseurl;
 
@@ -148,6 +148,16 @@ class Connection {
     }
 
     protected function exec() {
+
+        // Grab the remote user, for inclusion on the
+        if (array_key_exists("REMOTE_USER", $_SERVER)) {
+
+            $user = $_SERVER["REMOTE_USER"];
+            $user = strtok($user, '@');
+
+            curl_setopt($this->curl, CURLOPT_HTTPHEADER, ["X-UW-ACT-AS: $user"]);
+        }
+
         $resp = curl_exec($this->curl);
 
         if(curl_errno($this->curl)){
