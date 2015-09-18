@@ -57,19 +57,6 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
         );
     }
 
-//    /**
-//     * @expectedException              \Exception
-//     * @expectedExceptionMessageRegExp #No such file found for SSL certificate at.*#
-//     */
-//    public function testErrorBadSSLKeyPassword() {
-//        MockConnection::createInstance(
-//            "http://localhost/",
-//            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
-//            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
-//            "wrong-password"
-//        );
-//    }
-
     public function testCreateInstance() {
 
         MockConnection::createInstance(
@@ -98,18 +85,4 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
             "self-signed-password"
         );
     }
-
-    public function testUWActAsHeader() {
-
-        try {
-            MockConnection::getPersonInstance()->execGet("");
-        } catch (Exception $e) {
-            // This will throw a connection error
-        }
-
-        print_r(MockConnection::getPersonInstance()->curl->setOpt("header"));
-    }
-
-
-
 }
