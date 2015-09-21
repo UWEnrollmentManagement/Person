@@ -236,7 +236,7 @@ Script execution halts/no output
 Compatibility
 =============
 
-* PHP5
+* PHP 5.5, 5.6, 7.0
 * Person Web Service v1
 * Student Web Service v5
 
