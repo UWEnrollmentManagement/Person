@@ -245,10 +245,6 @@ Todo
 
 See GitHub [issue tracker](https://github.com/UWEnrollmentManagement/Person/issues/).
 
-License
-====
-
-Employees of the University of Washington may use this code in any capacity, without reservation.
 
 Getting Involved
 ================
