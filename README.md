@@ -257,5 +257,5 @@ Here's the general sequence of events for contribution:
 2. In any order:
   * Submit a pull request with a **failing** test that demonstrates the issue/feature.
   * Get acknowledgement/concurrence.
-3. Submit pull request that passes your test in (2). Include documentation, if appropriate.
+3. Revise your pull request to pass the test in (2). Include documentation, if appropriate.
 
