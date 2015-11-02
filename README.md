@@ -250,3 +250,12 @@ Getting Involved
 ================
 
 Feel free to open pull requests or issues. [GitHub](https://github.com/UWEnrollmentManagement/Person) is the canonical location of this project.
+
+Here's the general sequence of events for contribution:
+
+1. Open an issue in the [issue tracker](https://github.com/UWEnrollmentManagement/Person/issues/).
+2. In any order:
+  * Submit a pull request with a **failing** test that demonstrates the issue/feature.
+  * Get acknowledgement/concurrence.
+3. Submit pull request that passes your test in (2). Include documentation, if appropriate.
+
