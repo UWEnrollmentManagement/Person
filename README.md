@@ -152,7 +152,7 @@ Use `::getAttr` to retrieve an attribute from a person:
 Exposed Attributes
 ==================
 
-The container classes expose the following attributes, corresponding to those descibed in [this PWS glossary](https://wiki.cac.washington.edu/display/pws/PWS+Attribute+Glossary):
+The container classes expose the following attributes, corresponding to those described in [this PWS glossary](https://wiki.cac.washington.edu/display/pws/PWS+Attribute+Glossary):
 
 ```
     Exposed by all classes:
