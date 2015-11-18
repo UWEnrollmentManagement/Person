@@ -230,17 +230,17 @@ The container classes expose the following attributes, corresponding to those de
             "Href"
             "Year"
             "Quarter"
-        []("Notices")
-            []("RegID")
-            []("Href")
-        []("PersonFinancial")
-            []("RegID")
-            []("Href")
+        "Notices"[]
+            "RegID"
+            "Href"
+        "PersonFinancial"[]
+            "RegID"
+            "Href"
         "Resident"
         "VisaType"
-        []("TestScore")
-            []("RegID")
-            []("Href")
+        "TestScore"[]
+            "RegID"
+            "Href"
 
     Exposed only by Alumni:
         "DevelopmentID"
