@@ -195,7 +195,53 @@ The container classes expose the following attributes, corresponding to those de
         "Name"
         "Phone"
         "PublishInDirectory"
-        
+
+    Exposed by Student, when SWS access is enabled:
+        "RegID"
+        "FirstName"
+        "LastName"
+        "StudentName"
+        "EmployeeID"
+        "BirthDate"
+        "Gender"
+        "DirectoryRelease"
+        "LocalAddress"
+            "Line1"
+            "Line2"
+            "City"
+            "State"
+            "Zip"
+            "Country"
+            "PostalCode"
+        "PermanentAddress"
+            "Line1"
+            "Line2"
+            "City"
+            "State"
+            "Zip"
+            "Country"
+            "PostalCode"
+        "LocalPhone"
+        "PermanentPhone"
+        "Veteran"
+            "Code"
+            "Description"
+        "LastEnrolled"
+            "Href"
+            "Year"
+            "Quarter"
+        []("Notices")
+            []("RegID")
+            []("Href")
+        []("PersonFinancial")
+            []("RegID")
+            []("Href")
+        "Resident"
+        "VisaType"
+        []("TestScore")
+            []("RegID")
+            []("Href")
+
     Exposed only by Alumni:
         "DevelopmentID"
 

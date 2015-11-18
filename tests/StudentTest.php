@@ -15,13 +15,20 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("+1 555 555-5555", $p->getAttr("Phone"));
         $this->assertEquals(false, $p->getAttr("PublishInDirectory"));
 
+        $uwregid = $p->getAttr("UWRegID");
+
         global $myMockConnectionInstance;
-        $this->assertContains($uwnetid, $myMockConnectionInstance->lastUrl);
+        $this->assertContains($uwregid, $myMockConnectionInstance->lastUrl);
     }
 
     public function testFromStudentNumber() {
         $p = MockStudent::fromStudentNumber("1033334");
         $this->assertEquals("Non Matriculated", $p->getAttr("Department1"));
+    }
+
+    public function testSWSAttributes() {
+        $p = MockStudent::fromStudentNumber("1033334");
+        $this->assertEquals("UW TOWER O-3 BOX 359565", $p->getAttr("LocalAddress")["Line2"]);
     }
 
 }
