@@ -21,6 +21,7 @@ class MockConnectionInstance {
 
     protected function makeSlug($url) {
         $url = str_replace(["https://ws.admin.washington.edu/identity/v1/"], [""], $url);
+        $url = str_replace(["https://ws.admin.washington.edu/student/v5/"], [""], $url);
         $url = str_replace(["?", "/", ".", "="], ["-", "-", "-", "-"], $url);
 
         return $url;
@@ -43,7 +44,12 @@ class MockConnectionInstance {
 $myMockConnectionInstance = new MockConnectionInstance();
 
 trait MockPersonTrait {
-    protected static function getConn() {
+    protected static function getPersonConn() {
+        global $myMockConnectionInstance;
+        return $myMockConnectionInstance;
+    }
+
+    protected static function getStudentConn() {
         global $myMockConnectionInstance;
         return $myMockConnectionInstance;
     }

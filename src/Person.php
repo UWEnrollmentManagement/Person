@@ -75,7 +75,7 @@ class Person {
     }
 
     protected static function fromSimpleIdentifier($identifier) {
-        $resp = static::getConn()->execGET(
+        $resp = static::getPersonConn()->execGET(
             "person/$identifier/full.json"
         );
         $resp = static::parse($resp);
@@ -104,7 +104,7 @@ class Person {
             throw new \Exception("Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "].");
         }
 
-        $resp = static::getConn()->execGET(
+        $resp = static::getPersonConn()->execGET(
             "person.json?$identifierKey=$identifierValue"
         );
         $resp = static::parse($resp);
@@ -144,8 +144,12 @@ class Person {
         return $person;
     }
 
-    protected static function getConn() {
+    protected static function getPersonConn() {
         return Connection::getPersonInstance();
+    }
+
+    protected static function getStudentConn() {
+        return Connection::getStudentInstance();
     }
 
     protected static function parse($resp) {
