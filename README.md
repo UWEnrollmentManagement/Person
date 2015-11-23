@@ -19,7 +19,7 @@ For example:
         "myprivatekeypassword"
     );
     
-    // Query the web services
+    /* Query the web services */
     $student = Student::fromStudentNumber("1033334");
     
     echo $student->getAttr("RegisteredFirstMiddleName");
@@ -28,6 +28,12 @@ For example:
     echo $student->getAttr("UWNetID");
     // "javerage"
     
+    /* Retrieve registration for James Average*/
+    $registrations = $student->registrationSearch("2009", "summer");
+    echo $registrations[0]["CurriculumAbbreviation"];  // "TRAIN"
+    echo $registrations[0]["CourseNumber"];  // "100"
+    
+    /* Retrieve employee information from the web services */
     $employee = Employee::fromUWNetID("jschilz");
     
     echo $employee->getAttr("Department1");
@@ -46,12 +52,12 @@ This is *not* an official library, endorsed or supported by any party who manage
 Installation
 ===============
 
-This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.2.*"` line to your "require" dependencies:
+This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.3.*"` line to your "require" dependencies:
 
 ```
 {
     "require": {
-        "uwdoem/person": "0.2.*"
+        "uwdoem/person": "0.3.*"
     }
 }
 ```
@@ -96,7 +102,6 @@ You may now issue queries against the web service:
 In the case above, there does exist a student with StudentNumber "1033334": one of the university's notional test students. So this script will output "JAMES AVERAGE".
 
 The following methods may be used to query the database:
-
 ```
     // Available to Person, and all subclasses of Person
     $person = Person::fromUWNetID($uwnetid);
@@ -110,6 +115,7 @@ The following methods may be used to query the database:
     
     // Available only to Student
     $student = Student::fromStudentNumber($studentnumber);
+    $registrations = $student->registrationSearch($year, $quarter, [$extraSearchTerms]);
     
     // Available only to Employee
     $employee = Employee::fromEmployeeID($employeeid);
@@ -119,7 +125,6 @@ The following methods may be used to query the database:
 ```
 
 You can cast between classes each of the container classes' `::fromPerson` method:
-
 ```
     $person = Person::fromUWNetID($uwnetid);
     
@@ -128,7 +133,6 @@ You can cast between classes each of the container classes' `::fromPerson` metho
 ```
 
 The `::hasAffiliation` method can tell you whether a given person is a student, employee, and/or alumni:
-
 ```
     $person = Person::fromUWNetID($uwnetid);
     
@@ -139,7 +143,6 @@ The `::hasAffiliation` method can tell you whether a given person is a student, 
 ```
 
 Use `::getAttr` to retrieve an attribute from a person:
-
 ```
     $person = Person::fromUWNetID($uwnetid);
     $displayName = $person->getAttr("DisplayName");
@@ -147,6 +150,23 @@ Use `::getAttr` to retrieve an attribute from a person:
     $person = Student::fromPerson($person);
     $academicDepartment = $person->getAttr("Department1");
 
+```
+
+The `Student::registrationSearch` method returns an array of [Registration Resources](https://wiki.cac.washington.edu/display/SWS/Registration+Resource+V5), in associative array format:
+```
+   $student = Student::fromStudentNumber("1033334");
+   $registrations = $student->registrationSearch("2009", "summer");
+   
+   foreach ($registrations as $registration) {
+       echo $registration["CurriculumAbbreviation"];
+       echo $registration["CourseNumber"];
+   }
+```
+
+You can include optional parameters in your registration search, per the [Registration Search Resource spec](https://wiki.cac.washington.edu/display/SWS/Registration+Search+Resource+v5):
+```
+    $student = Student::fromStudentNumber("1033334");
+    $registrations = $student->registrationSearch("2009", "summer", ["is_active" => "true"]);
 ```
 
 Exposed Attributes
