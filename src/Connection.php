@@ -60,7 +60,7 @@ class Connection {
         }
 
         self::$personInstance = new static($baseurl . "identity/v1/", $sslkey, $sslcert, $sslkeypasswd);
-        self::$studentInstance = new static($baseurl . "person/v5/", $sslkey, $sslcert, $sslkeypasswd);
+        self::$studentInstance = new static($baseurl . "student/v5/", $sslkey, $sslcert, $sslkeypasswd);
     }
 
     protected function __construct($baseurl, $sslkey, $sslcert, $sslkeypasswd = null) {

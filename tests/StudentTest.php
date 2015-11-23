@@ -31,4 +31,12 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("UW TOWER O-3 BOX 359565", $p->getAttr("LocalAddress")["Line2"]);
     }
 
+    public function testRegistrationSearch() {
+        $p = MockStudent::fromStudentNumber("1033334");
+        $registrations = $p->registrationSearch("2009", "summer");
+
+        $this->assertEquals(1, sizeof($registrations));
+        $this->assertEquals("TRAIN", $registrations[0]["CurriculumAbbreviation"]);
+    }
+
 }

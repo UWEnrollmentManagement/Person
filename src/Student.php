@@ -57,7 +57,7 @@ class Student extends Person {
             "registration.json?" . http_build_query($searchTerms)
         );
 
-        return static::parse($resp);
+        return static::parse($resp)["Registrations"];
     }
 
     protected static function fromSimpleIdentifier($identifier) {
