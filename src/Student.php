@@ -52,6 +52,8 @@ class Student extends Person {
 
         $searchTerms = array_merge($defaultSearchTerms, $extraSearchTerms);
         $searchTerms["reg_id"] = $this->getAttr("UWRegID");
+        $searchTerms["year"] = $year;
+        $searchTerms["quarter"] = $quarter;
 
         $resp = static::getStudentConn()->execGET(
             "registration.json?" . http_build_query($searchTerms)
