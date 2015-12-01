@@ -325,3 +325,4 @@ Here's the general sequence of events for contribution:
   * Get acknowledgement/concurrence.
 3. Revise your pull request to pass the test in (2). Include documentation, if appropriate.
 
+PSR-2 compliance is enforced by [CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) in Travis.
