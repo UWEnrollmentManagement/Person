@@ -11,8 +11,8 @@ class Person
 {
 
     protected $attrs = [];
-    protected $_raw = [];
-    protected $_affiliations = [];
+    protected $raw = [];
+    protected $affiliations = [];
 
     protected static $AFFILIATION_TYPE = "person";
 
@@ -47,7 +47,7 @@ class Person
      */
     public function hasAffiliation($affiliation)
     {
-        return in_array($affiliation, $this->_affiliations);
+        return in_array($affiliation, $this->affiliations);
     }
 
     /**
@@ -99,18 +99,25 @@ class Person
     /**
      * Queries PWS/SWS to generate a Person, given an identifier type and value.
      *
-     * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
+     * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number",
+     *                                 "student_system_key", "development_id"]
      *
      * @param string $identifierKey
      * @param string $identifierValue
      * @return null|Person
-     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
+     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id",
+     *                                                     "student_number", "student_system_key",
+     *                                                     "development_id"]
      */
     public static function fromIdentifier($identifierKey, $identifierValue)
     {
-        $validIdentifierKeys = ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"];
+        $validIdentifierKeys = [
+            "uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"
+        ];
         if (!in_array($identifierKey, $validIdentifierKeys)) {
-            throw new \Exception("Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "].");
+            throw new \Exception(
+                "Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "]."
+            );
         }
 
         $resp = static::getPersonConn()->execGET(
@@ -138,13 +145,13 @@ class Person
     public static function fromPerson(Person $oldPerson)
     {
         $newPerson = new static();
-        return static::fill($newPerson, $oldPerson->_raw);
+        return static::fill($newPerson, $oldPerson->raw);
     }
 
     protected static function fill(Person $person, array $attrs)
     {
-        $person->_raw = $attrs;
-        $person->_affiliations = $attrs["EduPersonAffiliations"];
+        $person->raw = $attrs;
+        $person->affiliations = $attrs["EduPersonAffiliations"];
 
         foreach ($attrs as $key => $value) {
             if (is_string($value) || is_null($value) || is_bool($value)) {

@@ -5,7 +5,8 @@ namespace UWDOEM\Person;
 use UWDOEM\Person\Connection;
 
 /**
- * Container class for person and student-specific information received from Person Web Service and Student Web Service
+ * Container class for person and student-specific information received from Person Web Service and
+ * Student Web Service
  *
  * @package UWDOEM\Person
  */
@@ -16,7 +17,8 @@ class Student extends Person
 
 
     /**
-     * Perform a registration search on SWS, per https://wiki.cac.washington.edu/display/SWS/Registration+Search+Resource+v5
+     * Perform a registration search on SWS, per
+     *     https://wiki.cac.washington.edu/display/SWS/Registration+Search+Resource+v5
      *
      * @param string|int $year numeric year between 1950 and 2100 inclusive
      * @param string $quarter one of ["autumn", "winter", "spring", "summer"]

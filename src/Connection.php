@@ -51,7 +51,8 @@ class Connection
      * @param string $sslkey Absolute path to the protected SSL key used to authenticate your app to PWS or SWS.
      * @param string $sslcert Absolute path to the certificate file used to authenticate your app to PWS or SWS.
      * @param string|null $sslkeypasswd (Optional) Password for your protected key file.
-     * @throws \Exception if you attempt to intialize the connection more than one time in a page-load via ::createInstance
+     * @throws \Exception if you attempt to intialize the connection more than one time in a page-load via
+     *         ::createInstance
      */
     public static function createInstance($baseurl, $sslkey, $sslcert, $sslkeypasswd = null)
     {
