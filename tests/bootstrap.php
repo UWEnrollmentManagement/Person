@@ -24,8 +24,13 @@ class MockConnectionInstance {
         $url = str_replace(["https://ws.admin.washington.edu/student/v5/"], [""], $url);
         $url = str_replace(["?", "/", ".", "="], ["-", "-", "-", "-"], $url);
 
+        if (strlen($url) > 63) {
+            $url = md5($url);
+        }
+
         return $url;
     }
+
 
     public function execGET($url, $params = []) {
         $this->lastUrl = $url;
