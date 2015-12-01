@@ -7,11 +7,12 @@ namespace UWDOEM\Person;
  *
  * @package UWDOEM\Person
  */
-class Person {
+class Person
+{
 
     protected $attrs = [];
-    protected $_raw = [];
-    protected $_affiliations = [];
+    protected $raw = [];
+    protected $affiliations = [];
 
     protected static $AFFILIATION_TYPE = "person";
 
@@ -22,7 +23,8 @@ class Person {
      * @param $key
      * @param $value
      */
-    public function setAttr($key, $value) {
+    public function setAttr($key, $value)
+    {
         $this->attrs[$key] = $value;
     }
 
@@ -32,7 +34,8 @@ class Person {
      * @param $key
      * @return mixed
      */
-    public function getAttr($key) {
+    public function getAttr($key)
+    {
         return $this->attrs[$key];
     }
 
@@ -42,8 +45,9 @@ class Person {
      * @param $affiliation
      * @return bool
      */
-    public function hasAffiliation($affiliation) {
-        return in_array($affiliation, $this->_affiliations);
+    public function hasAffiliation($affiliation)
+    {
+        return in_array($affiliation, $this->affiliations);
     }
 
     /**
@@ -51,7 +55,8 @@ class Person {
      *
      * @return array
      */
-    public function getAttrs() {
+    public function getAttrs()
+    {
         return $this->attrs;
     }
 
@@ -60,7 +65,8 @@ class Person {
      * @param $uwnetid
      * @return null|Person
      */
-    public static function fromUWNetID($uwnetid) {
+    public static function fromUWNetID($uwnetid)
+    {
         return static::fromSimpleIdentifier($uwnetid);
     }
 
@@ -70,11 +76,13 @@ class Person {
      * @param $regid
      * @return null|Person
      */
-    public static function fromUWRegID($uwregid) {
+    public static function fromUWRegID($uwregid)
+    {
         return static::fromSimpleIdentifier($uwregid);
     }
 
-    protected static function fromSimpleIdentifier($identifier) {
+    protected static function fromSimpleIdentifier($identifier)
+    {
         $resp = static::getPersonConn()->execGET(
             "person/$identifier/full.json"
         );
@@ -84,24 +92,32 @@ class Person {
             return null;
         } else {
             $person = new static();
-            return static::fill($person,  $resp);
+            return static::fill($person, $resp);
         }
     }
 
     /**
      * Queries PWS/SWS to generate a Person, given an identifier type and value.
      *
-     * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
+     * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number",
+     *                                 "student_system_key", "development_id"]
      *
      * @param string $identifierKey
      * @param string $identifierValue
      * @return null|Person
-     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"]
+     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id",
+     *                                                     "student_number", "student_system_key",
+     *                                                     "development_id"]
      */
-    public static function fromIdentifier($identifierKey, $identifierValue) {
-        $validIdentifierKeys = ["uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"];
-        if (!in_array($identifierKey,$validIdentifierKeys)) {
-            throw new \Exception("Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "].");
+    public static function fromIdentifier($identifierKey, $identifierValue)
+    {
+        $validIdentifierKeys = [
+            "uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"
+        ];
+        if (!in_array($identifierKey, $validIdentifierKeys)) {
+            throw new \Exception(
+                "Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "]."
+            );
         }
 
         $resp = static::getPersonConn()->execGET(
@@ -126,14 +142,16 @@ class Person {
      * @param Person $oldPerson
      * @return Person
      */
-    public static function fromPerson(Person $oldPerson) {
+    public static function fromPerson(Person $oldPerson)
+    {
         $newPerson = new static();
-        return static::fill($newPerson,  $oldPerson->_raw);
+        return static::fill($newPerson, $oldPerson->raw);
     }
 
-    protected static function fill(Person $person, array $attrs) {
-        $person->_raw = $attrs;
-        $person->_affiliations = $attrs["EduPersonAffiliations"];
+    protected static function fill(Person $person, array $attrs)
+    {
+        $person->raw = $attrs;
+        $person->affiliations = $attrs["EduPersonAffiliations"];
 
         foreach ($attrs as $key => $value) {
             if (is_string($value) || is_null($value) || is_bool($value)) {
@@ -144,16 +162,18 @@ class Person {
         return $person;
     }
 
-    protected static function getPersonConn() {
+    protected static function getPersonConn()
+    {
         return Connection::getPersonInstance();
     }
 
-    protected static function getStudentConn() {
+    protected static function getStudentConn()
+    {
         return Connection::getStudentInstance();
     }
 
-    protected static function parse($resp) {
+    protected static function parse($resp)
+    {
         return Parser::parse($resp);
     }
-
 }

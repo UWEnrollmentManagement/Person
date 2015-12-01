@@ -9,6 +9,8 @@ addons:
 before_script:
   - sed -i '/phpdocumentor/d' composer.json
   - composer install
-script: phpunit --configuration tests/phpunit.xml tests
+script:
+  - phpunit --configuration tests/phpunit.xml tests
+  - ./vendor/bin/phpcs --ignore=*/vendor/*,*/tests/*,*/bin/* --standard=PSR2 .
 after_script:
   - vendor/bin/test-reporter

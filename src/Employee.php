@@ -7,21 +7,24 @@ namespace UWDOEM\Person;
  *
  * @package UWDOEM\Person
  */
-class Employee extends Person {
+class Employee extends Person
+{
 
     protected static $AFFILIATION_TYPE = "employee";
 
-    protected static function fill(Person $person, array $attrs) {
+    protected static function fill(Person $person, array $attrs)
+    {
         $attrs = array_merge(
             $attrs,
             $attrs["PersonAffiliations"]["EmployeePersonAffiliation"],
-            $attrs["PersonAffiliations"]["EmployeePersonAffiliation"]["EmployeeWhitePages"]);
+            $attrs["PersonAffiliations"]["EmployeePersonAffiliation"]["EmployeeWhitePages"]
+        );
 
         return parent::fill($person, $attrs);
     }
 
-    public static function fromEmployeeID($employeeID) {
+    public static function fromEmployeeID($employeeID)
+    {
         return static::fromIdentifier("employee_id", $employeeID);
     }
-
 }

@@ -7,20 +7,23 @@ namespace UWDOEM\Person;
  *
  * @package UWDOEM\Person
  */
-class Alumni extends Person {
+class Alumni extends Person
+{
 
     protected static $AFFILIATION_TYPE = "student";
 
-    protected static function fill(Person $person, array $attrs) {
+    protected static function fill(Person $person, array $attrs)
+    {
         $attrs = array_merge(
             $attrs,
-            $attrs["PersonAffiliations"]["AlumPersonAffiliation"]);
+            $attrs["PersonAffiliations"]["AlumPersonAffiliation"]
+        );
 
         return parent::fill($person, $attrs);
     }
 
-    public static function fromDevelopmentID($developmentID) {
+    public static function fromDevelopmentID($developmentID)
+    {
         return static::fromIdentifier("development_id", $developmentID);
     }
-
 }

@@ -7,9 +7,11 @@ namespace UWDOEM\Person;
  *
  * @package UWDOEM\Person
  */
-class Parser {
+class Parser
+{
 
-    public static function parse($resp) {
+    public static function parse($resp)
+    {
         return json_decode($resp, true);
     }
 }
