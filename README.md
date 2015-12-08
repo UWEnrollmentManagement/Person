@@ -317,7 +317,7 @@ Getting Involved
 
 Feel free to open pull requests or issues. [GitHub](https://github.com/UWEnrollmentManagement/Person) is the canonical location of this project.
 
-Here's the general sequence of events for contribution:
+Here's the general sequence of events for code contribution:
 
 1. Open an issue in the [issue tracker](https://github.com/UWEnrollmentManagement/Person/issues/).
 2. In any order:
@@ -325,3 +325,4 @@ Here's the general sequence of events for contribution:
   * Get acknowledgement/concurrence.
 3. Revise your pull request to pass the test in (2). Include documentation, if appropriate.
 
+PSR-2 compliance is enforced by [CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) in Travis.
