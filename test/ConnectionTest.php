@@ -39,7 +39,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
         MockConnection::createInstance(
             "http://localhost/",
             getcwd() . "/" . (string)rand() . ".key",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
+            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
             "self-signed-password"
         );
     }
@@ -51,7 +51,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
     public function testErrorNoSuchSSLCert() {
         MockConnection::createInstance(
             "http://localhost/",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
+            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
             getcwd() . "/" . (string)rand() . ".crt",
             "self-signed-password"
         );
@@ -61,8 +61,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
 
         MockConnection::createInstance(
             "http://localhost/",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.key",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
+            getcwd() . "/test/test-certs/self.signed.test.certs.key",
+            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
             "self-signed-password"
         );
 
@@ -80,8 +80,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase
     public function testErrorCreateInstanceTwice() {
         MockConnection::createInstance(
             "http://localhost/",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.key",
-            getcwd() . "/tests/test-certs/self.signed.test.certs.crt",
+            getcwd() . "/test/test-certs/self.signed.test.certs.key",
+            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
             "self-signed-password"
         );
     }
