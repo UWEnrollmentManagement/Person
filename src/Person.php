@@ -215,7 +215,6 @@ class Person
             UW_WS_SSL_KEY_PATH,
             UW_WS_SSL_CERT_PATH,
             UW_WS_SSL_KEY_PASSWD
-
         );
     }
 
