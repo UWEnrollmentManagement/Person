@@ -14,11 +14,6 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Average, James A", $p->getAttr("Name"));
         $this->assertEquals("+1 555 555-5555", $p->getAttr("Phone"));
         $this->assertEquals(false, $p->getAttr("PublishInDirectory"));
-
-        $uwregid = $p->getAttr("UWRegID");
-
-        global $myMockConnectionInstance;
-        $this->assertContains($uwregid, $myMockConnectionInstance->lastUrl);
     }
 
     public function testFromStudentNumber() {

@@ -2,6 +2,8 @@
 
 namespace UWDOEM\Person;
 
+use UWDOEM\Connection\Connection;
+
 /**
  * Container class for data received from Person Web Service and Student Web Service
  *
@@ -13,6 +15,9 @@ class Person
     protected $attrs = [];
     protected $raw = [];
     protected $affiliations = [];
+
+    protected static $personConnection;
+    protected static $studentConnection;
 
     protected static $AFFILIATION_TYPE = "person";
 
@@ -73,7 +78,7 @@ class Person
     /**
      * Queries PWS/SWS to generate a Person, given a UWRegID.
      *
-     * @param $regid
+     * @param $uwregid
      * @return null|Person
      */
     public static function fromUWRegID($uwregid)
@@ -83,7 +88,7 @@ class Person
 
     protected static function fromSimpleIdentifier($identifier)
     {
-        $resp = static::getPersonConn()->execGET(
+        $resp = static::getPersonConnection()->execGET(
             "person/$identifier/full.json"
         );
         $resp = static::parse($resp);
@@ -120,7 +125,7 @@ class Person
             );
         }
 
-        $resp = static::getPersonConn()->execGET(
+        $resp = static::getPersonConnection()->execGET(
             "person.json?$identifierKey=$identifierValue"
         );
         $resp = static::parse($resp);
@@ -162,14 +167,40 @@ class Person
         return $person;
     }
 
-    protected static function getPersonConn()
+    /**
+     * @param $baseUrl
+     * @return Connection
+     */
+    protected static function makeConnection($baseUrl)
     {
-        return Connection::getPersonInstance();
+        return new Connection(
+            "http://localhost/",
+            getcwd() . "",
+            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
+            $baseUrl
+        );
     }
 
-    protected static function getStudentConn()
+    /**
+     * @return Connection
+     */
+    protected static function getPersonConnection()
     {
-        return Connection::getStudentInstance();
+        if (!static::$personConnection) {
+            static::$personConnection = static::makeConnection("person");
+        }
+        return static::$personConnection;
+    }
+
+    /**
+     * @return Connection
+     */
+    protected static function getStudentConnection()
+    {
+        if (!static::$studentConnection) {
+            static::$studentConnection = static::makeConnection("student");
+        }
+        return static::$studentConnection;
     }
 
     protected static function parse($resp)

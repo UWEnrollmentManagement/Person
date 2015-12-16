@@ -59,7 +59,7 @@ class Student extends Person
         $searchTerms["year"] = $year;
         $searchTerms["quarter"] = $quarter;
 
-        $resp = static::getStudentConn()->execGET(
+        $resp = static::getStudentConnection()->execGET(
             "registration.json?" . http_build_query($searchTerms)
         );
 
@@ -73,7 +73,7 @@ class Student extends Person
 
         $uwregid = $person->getAttr("UWRegID");
 
-        $resp = static::getStudentConn()->execGET(
+        $resp = static::getStudentConnection()->execGET(
             "person/$uwregid.json"
         );
 

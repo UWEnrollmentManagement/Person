@@ -6,7 +6,11 @@
       "src/"
     ]
   },
+  "require": {
+    "uwdoem/connection": "1.*"
+  },
   "require-dev": {
+    "uwdoem/standard": "*",
     "phpunit/phpunit": "4.5.*",
     "phpdocumentor/phpdocumentor": "2.7.*",
     "codeclimate/php-test-reporter": "dev-master",

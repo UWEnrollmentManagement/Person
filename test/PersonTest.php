@@ -16,7 +16,7 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $p = MockPerson::fromUWNetID("javerage");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
-        $p = $p = MockPerson::fromUWNetID("nosuchuser");
+        $p = MockPerson::fromUWNetID("nosuchuser");
         $this->assertNull($p);
     }
 
@@ -24,7 +24,7 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $p = MockPerson::fromUWRegID("9136CCB8F66711D5BE060004AC494FFE");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
-        $p = $p = MockPerson::fromUWRegID("nosuchuser");
+        $p = MockPerson::fromUWRegID("nosuchuser");
         $this->assertNull($p);
     }
 
