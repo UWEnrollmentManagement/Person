@@ -6,6 +6,11 @@
       "src/"
     ]
   },
+  "autoload-dev": {
+    "classmap": [
+      "test/"
+    ]
+  },
   "require": {
     "uwdoem/connection": "1.*"
   },

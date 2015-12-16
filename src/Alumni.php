@@ -10,8 +10,14 @@ namespace UWDOEM\Person;
 class Alumni extends Person
 {
 
+    /** @var string */
     protected static $AFFILIATION_TYPE = "student";
 
+    /**
+     * @param Person $person
+     * @param array  $attrs
+     * @return Person
+     */
     protected static function fill(Person $person, array $attrs)
     {
         $attrs = array_merge(
@@ -22,6 +28,10 @@ class Alumni extends Person
         return parent::fill($person, $attrs);
     }
 
+    /**
+     * @param string $developmentID
+     * @return null|Person
+     */
     public static function fromDevelopmentID($developmentID)
     {
         return static::fromIdentifier("development_id", $developmentID);

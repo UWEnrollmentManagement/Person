@@ -1,8 +1,13 @@
 <?php
 
+namespace UWDOEM\Person\Test;
+
+use PHPUnit_Framework_TestCase;
+
 class PersonTest extends PHPUnit_Framework_TestCase
 {
-    public function testSetGetAttr() {
+    public function testSetGetAttr()
+    {
         $p = new MockPerson();
 
         $p->setAttr("key1", "value1");
@@ -12,7 +17,8 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($p->getAttr("key2"), "value2");
     }
 
-    public function testFromUWNetID() {
+    public function testFromUWNetID()
+    {
         $p = MockPerson::fromUWNetID("javerage");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
@@ -20,7 +26,8 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertNull($p);
     }
 
-    public function testFromUWRegID() {
+    public function testFromUWRegID()
+    {
         $p = MockPerson::fromUWRegID("9136CCB8F66711D5BE060004AC494FFE");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
@@ -28,7 +35,8 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertNull($p);
     }
 
-    public function testHasAffiliation() {
+    public function testHasAffiliation()
+    {
         $uwnetid = "javerage";
         $p = MockPerson::fromUWNetID($uwnetid);
 
@@ -41,7 +49,8 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($p->hasAffiliation("sdfasdfjkl;sdfa"));
     }
 
-    public function testClassCasting() {
+    public function testClassCasting()
+    {
         $uwnetid = "javerage";
 
         $p = MockPerson::fromUWNetID($uwnetid);
@@ -50,12 +59,12 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($s->getAttr("StudentNumber"), "1033334");
     }
 
-    public function testIdentifierSearch() {
+    public function testIdentifierSearch()
+    {
         $p = MockPerson::fromIdentifier("employee_id", "123456789");
         $this->assertEquals($p->getAttr("DisplayName"), "James Average Student");
 
         $p = MockPerson::fromIdentifier("uwnetid", "nosuchuser");
         $this->assertNull($p);
     }
-
 }

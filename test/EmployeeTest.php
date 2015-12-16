@@ -1,8 +1,13 @@
 <?php
 
+namespace UWDOEM\Person\Test;
+
+use PHPUnit_Framework_TestCase;
+
 class EmployeeTest extends PHPUnit_Framework_TestCase
 {
-    public function testEmployeeFill() {
+    public function testEmployeeFill()
+    {
         $uwnetid = "javerage";
 
         $p = MockEmployee::fromUWNetID($uwnetid);
@@ -12,9 +17,9 @@ class EmployeeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($p->getAttr("Title1"), "Web Developer");
     }
 
-    public function testFromEmployeeID() {
+    public function testFromEmployeeID()
+    {
         $p = MockEmployee::fromEmployeeID("123456789");
         $this->assertEquals($p->getAttr("Department1"), "Student Financial Aid Office");
     }
-
 }

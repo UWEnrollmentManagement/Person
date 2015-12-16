@@ -1,9 +1,13 @@
 <?php
 
+namespace UWDOEM\Person\Test;
+
+use PHPUnit_Framework_TestCase;
 
 class StudentTest extends PHPUnit_Framework_TestCase
 {
-    public function testStudentFill() {
+    public function testStudentFill()
+    {
         $uwnetid = "javerage";
 
         $p = MockStudent::fromUWNetID($uwnetid);
@@ -16,22 +20,24 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $p->getAttr("PublishInDirectory"));
     }
 
-    public function testFromStudentNumber() {
+    public function testFromStudentNumber()
+    {
         $p = MockStudent::fromStudentNumber("1033334");
         $this->assertEquals("Non Matriculated", $p->getAttr("Department1"));
     }
 
-    public function testSWSAttributes() {
+    public function testSWSAttributes()
+    {
         $p = MockStudent::fromStudentNumber("1033334");
         $this->assertEquals("UW TOWER O-3 BOX 359565", $p->getAttr("LocalAddress")["Line2"]);
     }
 
-    public function testRegistrationSearch() {
+    public function testRegistrationSearch()
+    {
         $p = MockStudent::fromStudentNumber("1033334");
         $registrations = $p->registrationSearch("2009", "summer");
 
         $this->assertEquals(1, sizeof($registrations));
         $this->assertEquals("TRAIN", $registrations[0]["CurriculumAbbreviation"]);
     }
-
 }

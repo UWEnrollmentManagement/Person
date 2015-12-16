@@ -12,21 +12,31 @@ use UWDOEM\Connection\Connection;
 class Person
 {
 
+    /** @var array */
     protected $attrs = [];
+
+    /** @var array */
     protected $raw = [];
+
+    /** @var array */
     protected $affiliations = [];
 
+    /** @var \UWDOEM\Connection\Connection */
     protected static $personConnection;
+
+    /** @var \UWDOEM\Connection\Connection */
     protected static $studentConnection;
 
+    /** @var string */
     protected static $AFFILIATION_TYPE = "person";
 
     /**
      * Sets a value on your LOCAL COPY of the person.
      *
      * SWS/PWS do not support UPDATING person/student models.
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed  $value
+     * @return void
      */
     public function setAttr($key, $value)
     {
@@ -36,7 +46,7 @@ class Person
     /**
      * Gets a value from your local copy of the person.
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      */
     public function getAttr($key)
@@ -47,8 +57,8 @@ class Person
     /**
      * Returns whether the given person has the given affiliation.
      *
-     * @param $affiliation
-     * @return bool
+     * @param string $affiliation
+     * @return boolean
      */
     public function hasAffiliation($affiliation)
     {
@@ -67,7 +77,7 @@ class Person
 
     /**
      * Queries PWS/SWS to generate a Person, given a UWNetID.
-     * @param $uwnetid
+     * @param string $uwnetid
      * @return null|Person
      */
     public static function fromUWNetID($uwnetid)
@@ -78,7 +88,7 @@ class Person
     /**
      * Queries PWS/SWS to generate a Person, given a UWRegID.
      *
-     * @param $uwregid
+     * @param string $uwregid
      * @return null|Person
      */
     public static function fromUWRegID($uwregid)
@@ -86,6 +96,10 @@ class Person
         return static::fromSimpleIdentifier($uwregid);
     }
 
+    /**
+     * @param string $identifier
+     * @return null|Person
+     */
     protected static function fromSimpleIdentifier($identifier)
     {
         $resp = static::getPersonConnection()->execGET(
@@ -105,14 +119,14 @@ class Person
      * Queries PWS/SWS to generate a Person, given an identifier type and value.
      *
      * Identifier type must be one of ["uwregid", "uwnetid", "employee_id", "student_number",
-     *                                 "student_system_key", "development_id"]
+     *                                 "student_system_key", "development_id"].
      *
      * @param string $identifierKey
      * @param string $identifierValue
      * @return null|Person
-     * @throws \Exception if $identifierKey is not one of ["uwregid", "uwnetid", "employee_id",
+     * @throws \Exception If $identifierKey is not one of ["uwregid", "uwnetid", "employee_id",
      *                                                     "student_number", "student_system_key",
-     *                                                     "development_id"]
+     *                                                     "development_id"].
      */
     public static function fromIdentifier($identifierKey, $identifierValue)
     {
@@ -144,6 +158,7 @@ class Person
      * Ex:
      * $p = Person::fromUWNetId($uwnetid); // $p is a Person
      * $p = Employee::fromPerson($p); // $p is now cast into an employee
+     *
      * @param Person $oldPerson
      * @return Person
      */
@@ -153,6 +168,11 @@ class Person
         return static::fill($newPerson, $oldPerson->raw);
     }
 
+    /**
+     * @param Person $person
+     * @param array  $attrs
+     * @return Person
+     */
     protected static function fill(Person $person, array $attrs)
     {
         $person->raw = $attrs;
@@ -168,7 +188,7 @@ class Person
     }
 
     /**
-     * @param $baseUrl
+     * @param string $baseUrl
      * @return Connection
      */
     protected static function makeConnection($baseUrl)
@@ -203,6 +223,10 @@ class Person
         return static::$studentConnection;
     }
 
+    /**
+     * @param string $resp
+     * @return array
+     */
     protected static function parse($resp)
     {
         return Parser::parse($resp);

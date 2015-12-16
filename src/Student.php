@@ -13,18 +13,18 @@ use UWDOEM\Person\Connection;
 class Student extends Person
 {
 
+    /** @var string */
     protected static $AFFILIATION_TYPE = "student";
-
 
     /**
      * Perform a registration search on SWS, per
      *     https://wiki.cac.washington.edu/display/SWS/Registration+Search+Resource+v5
      *
-     * @param string|int $year numeric year between 1950 and 2100 inclusive
-     * @param string $quarter one of ["autumn", "winter", "spring", "summer"]
-     * @param string[] $extraSearchTerms associative array of search terms ex: ["course_number" => "100"]
-     * @return mixed associative array object of registration search results
-     * @throws \Exception if provided with invalid year, invalid quarter, or invalid search terms
+     * @param integer  $year             Numeric year between 1950 and 2100 inclusive.
+     * @param string   $quarter          One of ["autumn", "winter", "spring", "summer"].
+     * @param string[] $extraSearchTerms Associative array of search terms ex: ["course_number" => "100"].
+     * @return mixed Associative array object of registration search results
+     * @throws \Exception If provided with invalid year, invalid quarter, or invalid search terms.
      */
     public function registrationSearch($year, $quarter, array $extraSearchTerms = [])
     {
@@ -66,6 +66,10 @@ class Student extends Person
         return static::parse($resp)["Registrations"];
     }
 
+    /**
+     * @param string $identifier
+     * @return null|Person
+     */
     protected static function fromSimpleIdentifier($identifier)
     {
 
@@ -84,6 +88,11 @@ class Student extends Person
         return $person;
     }
 
+    /**
+     * @param Person $person
+     * @param array  $attrs
+     * @return Person
+     */
     protected static function fill(Person $person, array $attrs)
     {
 
@@ -98,6 +107,10 @@ class Student extends Person
         return $student;
     }
 
+    /**
+     * @param string $studentNumber
+     * @return null|Person
+     */
     public static function fromStudentNumber($studentNumber)
     {
         return static::fromIdentifier("student_number", $studentNumber);

@@ -10,8 +10,14 @@ namespace UWDOEM\Person;
 class Employee extends Person
 {
 
+    /** @var string */
     protected static $AFFILIATION_TYPE = "employee";
 
+    /**
+     * @param Person $person
+     * @param array  $attrs
+     * @return Person
+     */
     protected static function fill(Person $person, array $attrs)
     {
         $attrs = array_merge(
@@ -23,6 +29,10 @@ class Employee extends Person
         return parent::fill($person, $attrs);
     }
 
+    /**
+     * @param string $employeeID
+     * @return null|Person
+     */
     public static function fromEmployeeID($employeeID)
     {
         return static::fromIdentifier("employee_id", $employeeID);
