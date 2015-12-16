@@ -43,47 +43,45 @@ For example:
 ```
 
 Notice
-======
+------
 
 This is *not* an official library, endorsed or supported by any party who manages or owns information accessed via PWS or SWS. This library is *not* endorsed or supported by the University of Washington Department of Enrollment Management.
 
 Installation
-===============
+------------
 
-This library is published on packagist. To install using Composer, add the `"uwdoem/person": "0.3.*"` line to your "require" dependencies:
+This library is published on packagist. To install using Composer, add the `"uwdoem/person": "1.*"` line to your "require" dependencies:
 
 ```
 {
     "require": {
-        "uwdoem/person": "0.3.*"
+        "uwdoem/person": "1.*"
     }
 }
 ```
 
-Of course, if you're not using Composer then you can download the repository using the *Download ZIP* button at right.
+Of course it is possible to use *Person* without Composer by downloading it directly, but use of Composer to manage packages is highly recommended. See [Composer](https://getcomposer.org/) for more information.
 
 Use
-===
+---
 
-This client library provides a `Connection` class and four data-container classes: `Person`, `Student`, `Employee`, and `Alumni`.
+This client library provides four data-container classes: `Person`, `Student`, `Employee`, and `Alumni`.
 
 If you have not already done so, follow PWS's instructions on [getting access to PWS](https://wiki.cac.washington.edu/display/pws/Getting+Access+to+PWS). A similar set of steps will allow you to [gain access to SWS](https://wiki.cac.washington.edu/display/SWS/Getting+Access+to+SWS). You'll need to place both the private private key you created and also the university-signed certificate on your web server, with read-accessibility for your web-server process.
 
 Before querying the web services, you must first initialize the connection by calling `::createInstance`:
 
 ```
-    // Intialize the connection
-    Connection::createInstance(
-        $base_service_url,
-        $my_ssl_key_path,
-        $my_ssl_cert_path,
-        $my_ssl_key_passwd
-    );
+    // Intialize the required settings
+    define('UW_WS_BASE_PATH', '/path/to/my/private.key');
+    define('UW_WS_SSL_KEY_PATH', '/path/to/my/private.key');
+    define('UW_WS_SSL_CERT_PATH', '/path/to/my/public_cert.pem');
+    define('UW_WS_SSL_KEY_PASSWD', 'myprivatekeypassword');  // Can be blank for no password: ''
 ```
 
-The arguments `$my_ssl_key_path` and `$my_ssl_cert_path` correspond to the absolute locations of your private key and university-signed certificate. The `$my_ssl_key_password` argument is OPTIONAL and should be provided only if you have a password associated with the provided private key file.
+The terms `UW_WS_SSL_KEY_PATH` and `UW_WS_SSL_CERT_PATH` correspond to the absolute locations of your private key and university-signed certificate. The `UW_WS_SSL_KEY_PASSWD` corresponds to the string which unlocks your private key; if your key does not have a password then use a blank string, eg: `''`.
 
-The argument `$base_service_url` corresponds to the base URL shared by UW web services. Currently this is either `"https://ws.admin.washington.edu/"` for the production-access web services, or `"https://wseval.s.uw.edu/"` for the testing/development-access web services.
+The term `UW_WS_BASE_PATH` corresponds to the base URL shared by UW web services. Currently this is either `"https://ws.admin.washington.edu/"` for the production-access web services, or `"https://wseval.s.uw.edu/"` for the testing/development-access web services.
 
 You may now issue queries against the web service:
 
@@ -168,7 +166,7 @@ You can include optional parameters in your registration search, per the [Regist
 ```
 
 Exposed Attributes
-==================
+------------------
 
 The container classes expose the following attributes, corresponding to those described in [this PWS glossary](https://wiki.cac.washington.edu/display/pws/PWS+Attribute+Glossary):
 
@@ -265,25 +263,32 @@ The container classes expose the following attributes, corresponding to those de
 
 ```
 Troubleshooting
-===============
+---------------
 
 This library *will* throw warnings and exceptions when it recognizes an error. Turn on error reporting to see these. For errors involving *cURL*, *SSL*, and or script execution halts/no output, see [UWEnrollmentManagement/Connection](https://github.com/UWEnrollmentManagement/Connection) troubleshooting.
 
 Compatibility
-=============
+-------------
 
-* PHP 5.5, 5.6, 7.0
 * Person Web Service v1
 * Student Web Service v5
 
+
+Requirements
+------------
+
+* PHP 5.5, 5.6, 7.0
+* uwdoem/connection 2.*
+
+
 Todo
-====
+----
 
 See GitHub [issue tracker](https://github.com/UWEnrollmentManagement/Person/issues/).
 
 
 Getting Involved
-================
+----------------
 
 Feel free to open pull requests or issues. [GitHub](https://github.com/UWEnrollmentManagement/Person) is the canonical location of this project.
 
