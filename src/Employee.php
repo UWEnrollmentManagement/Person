@@ -16,7 +16,7 @@ class Employee extends Person
     /**
      * @param Person $person
      * @param array  $attrs
-     * @return Person
+     * @return Employee
      */
     protected static function fill(Person $person, array $attrs)
     {
@@ -31,7 +31,7 @@ class Employee extends Person
 
     /**
      * @param string $employeeID
-     * @return null|Person
+     * @return null|Employee
      */
     public static function fromEmployeeID($employeeID)
     {

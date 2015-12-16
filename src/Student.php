@@ -68,7 +68,7 @@ class Student extends Person
 
     /**
      * @param string $identifier
-     * @return null|Person
+     * @return null|Student
      */
     protected static function fromSimpleIdentifier($identifier)
     {
@@ -91,7 +91,7 @@ class Student extends Person
     /**
      * @param Person $person
      * @param array  $attrs
-     * @return Person
+     * @return Student
      */
     protected static function fill(Person $person, array $attrs)
     {
@@ -109,7 +109,7 @@ class Student extends Person
 
     /**
      * @param string $studentNumber
-     * @return null|Person
+     * @return null|Student
      */
     public static function fromStudentNumber($studentNumber)
     {
