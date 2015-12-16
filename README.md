@@ -10,14 +10,12 @@ Smoothly poll the University of Washington's [Person Web Service](https://wiki.c
 
 For example:
 
-```
-    // Intialize the connection
-    Connection::createInstance(
-        "https://ws.admin.washington.edu/",
-        "/path/to/my/private.key",
-        "/path/to/my/public_cert.pem",
-        "myprivatekeypassword"
-    );
+``` 
+    // Intialize the required settings
+    define('UW_WS_BASE_PATH', '/path/to/my/private.key');
+    define('UW_WS_SSL_KEY_PATH', '/path/to/my/private.key');
+    define('UW_WS_SSL_CERT_PATH', '/path/to/my/public_cert.pem');
+    define('UW_WS_SSL_KEY_PASSWD', 'myprivatekeypassword');  // Can be blank for no password: ''
     
     /* Query the web services */
     $student = Student::fromStudentNumber("1033334");
