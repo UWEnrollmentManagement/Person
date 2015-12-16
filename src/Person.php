@@ -190,14 +190,32 @@ class Person
     /**
      * @param string $baseUrl
      * @return Connection
+     * @throws \Exception If any of the required constants have not been set.
      */
     protected static function makeConnection($baseUrl)
     {
+        if (!defined("UW_WS_BASE_PATH")) {
+            throw new \Exception("You must define the constant UW_WS_BASE_PATH before using this library.");
+        }
+
+        if (!defined("UW_WS_SSL_KEY_PATH")) {
+            throw new \Exception("You must define the constant UW_WS_SSL_KEY_PATH before using this library.");
+        }
+
+        if (!defined("UW_WS_SSL_CERT_PATH")) {
+            throw new \Exception("You must define the constant UW_WS_SSL_CERT_PATH before using this library.");
+        }
+
+        if (!defined("UW_WS_SSL_KEY_PASSWD")) {
+            throw new \Exception("You must define the constant UW_WS_SSL_KEY_PASSWD before using this library.");
+        }
+
         return new Connection(
-            "http://localhost/",
-            getcwd() . "",
-            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
-            $baseUrl
+            UW_WS_BASE_PATH . $baseUrl,
+            UW_WS_SSL_KEY_PATH,
+            UW_WS_SSL_CERT_PATH,
+            UW_WS_SSL_KEY_PASSWD
+
         );
     }
 
