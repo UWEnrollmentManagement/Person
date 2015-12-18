@@ -2,8 +2,6 @@
 
 namespace UWDOEM\Person;
 
-use UWDOEM\Person\Connection;
-
 /**
  * Container class for person and student-specific information received from Person Web Service and
  * Student Web Service
