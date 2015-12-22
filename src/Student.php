@@ -40,7 +40,7 @@ class Student extends Person
 
         $validQuarters = ["autumn", "winter", "spring", "summer"];
         if (!in_array("$quarter", $validQuarters)) {
-            throw new \Exception("Quarter must be one of [" . implode(", $validQuarters") . "], case sensitive.");
+            throw new \Exception("Quarter must be one of [" . implode(", ", $validQuarters) . "], case sensitive.");
         }
 
         $validSearchKeys = [
