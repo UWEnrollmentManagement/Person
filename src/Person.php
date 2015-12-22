@@ -194,12 +194,7 @@ class Person
      */
     protected static function makeConnection($baseUrl)
     {
-        $requiredConstants = [
-            "UW_WS_BASE_PATH",
-            "UW_WS_SSL_KEY_PATH",
-            "UW_WS_SSL_CERT_PATH",
-            "UW_WS_SSL_KEY_PASSWD"
-        ];
+        $requiredConstants = ["UW_WS_BASE_PATH", "UW_WS_SSL_KEY_PATH", "UW_WS_SSL_CERT_PATH", "UW_WS_SSL_KEY_PASSWD"];
 
         foreach ($requiredConstants as $constant) {
             if (!defined($constant)) {
