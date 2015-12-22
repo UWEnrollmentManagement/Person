@@ -194,20 +194,17 @@ class Person
      */
     protected static function makeConnection($baseUrl)
     {
-        if (!defined("UW_WS_BASE_PATH")) {
-            throw new \Exception("You must define the constant UW_WS_BASE_PATH before using this library.");
-        }
+        $requiredConstants = [
+            "UW_WS_BASE_PATH",
+            "UW_WS_SSL_KEY_PATH",
+            "UW_WS_SSL_CERT_PATH",
+            "UW_WS_SSL_KEY_PASSWD"
+        ];
 
-        if (!defined("UW_WS_SSL_KEY_PATH")) {
-            throw new \Exception("You must define the constant UW_WS_SSL_KEY_PATH before using this library.");
-        }
-
-        if (!defined("UW_WS_SSL_CERT_PATH")) {
-            throw new \Exception("You must define the constant UW_WS_SSL_CERT_PATH before using this library.");
-        }
-
-        if (!defined("UW_WS_SSL_KEY_PASSWD")) {
-            throw new \Exception("You must define the constant UW_WS_SSL_KEY_PASSWD before using this library.");
+        foreach ($requiredConstants as $constant) {
+            if (!defined($constant)) {
+                throw new \Exception("You must define the constant $constant before using this library.");
+            }
         }
 
         return new Connection(
