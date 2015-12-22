@@ -3,8 +3,15 @@
 namespace UWDOEM\Person;
 
 /**
- * Container class for person and student-specific information received from Person Web Service and
- * Student Web Service
+ * Container class for person and student-specific information received from Person Web
+ * Service and Student Web Service
+ *
+ * @method static null|Student fromUWNetID() fromUWNetID(string $uwnetid)
+ *                             Queries PWS/SWS to generate a Student, given a UWNetID.
+ * @method static null|Student fromUWRegID() fromUWRegID(string $uwregid)
+ *                             Queries PWS/SWS to generate a Student, given a UWRegID.
+ * @method static null|Student fromIdentifier() fromIdentifier(string $identifierKey, string $identifierValue)
+ *                             Queries PWS/SWS to generate a Person, given an identifier type and value.
  *
  * @package UWDOEM\Person
  */
