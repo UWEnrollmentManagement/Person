@@ -67,4 +67,17 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $p = MockPerson::fromIdentifier("uwnetid", "nosuchuser");
         $this->assertNull($p);
     }
+
+    /**
+     * If we attempt to create a person from a bad identifier type, then an error shall
+     * be raised
+     *
+     * @return void
+     * @expectedException \Exception
+     * @expectedExceptionMessageRegExp #Identifier key 'badIdentifierKey' must be one of.*#
+     */
+    public function testFromBadIdentifier()
+    {
+        $p = MockPerson::fromIdentifier('badIdentifierKey', 'identifierValue');
+    }
 }
