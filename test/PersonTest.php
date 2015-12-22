@@ -68,6 +68,18 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertNull($p);
     }
 
+    public function testGetAttrs()
+    {
+        $p = MockPerson::fromIdentifier("employee_id", "123456789");
+        $attrs = $p->getAttrs();
+
+        $this->assertArrayHasKey("DisplayName", $attrs);
+        $this->assertArrayHasKey("RegisteredName", $attrs);
+
+        $this->assertEquals("James Average Student", $attrs["DisplayName"]);
+        $this->assertEquals("JAMES A STUDENT", $attrs["RegisteredName"]);
+    }
+
     /**
      * If we attempt to create a person from a bad identifier type, then an error shall
      * be raised
