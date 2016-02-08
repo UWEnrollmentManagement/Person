@@ -23,7 +23,7 @@ class Alumni extends Person
 
     /**
      * Create an Alumni from a Person and a set of supplementary attributes.
-     * 
+     *
      * @param Person $person
      * @param array  $attrs
      * @return Alumni
@@ -40,7 +40,7 @@ class Alumni extends Person
 
     /**
      * Create an Alumni from a development ID.
-     * 
+     *
      * @param string $developmentID
      * @return null|Alumni
      */
