@@ -34,12 +34,12 @@ class Student extends Person
     public function registrationSearch($year, $quarter, array $extraSearchTerms = [])
     {
 
-        if (!is_numeric($year) || $year < 1950 || $year > 2100) {
+        if (is_numeric($year) === false || $year < 1950 || $year > 2100) {
             throw new \Exception("Please provide a numeric year between 1950 and 2100");
         }
 
         $validQuarters = ["autumn", "winter", "spring", "summer"];
-        if (!in_array("$quarter", $validQuarters)) {
+        if (in_array("$quarter", $validQuarters) === false) {
             throw new \Exception("Quarter must be one of [" . implode(", ", $validQuarters) . "], case sensitive.");
         }
 
@@ -48,7 +48,7 @@ class Student extends Person
             "is_active", "verbose", "changed_since_date", "transcriptable_course", "grading_system"
         ];
         $invalidSearchKeys = array_diff(array_keys($extraSearchTerms), $validSearchKeys);
-        if ($invalidSearchKeys) {
+        if ($invalidSearchKeys !== []) {
             throw new \Exception("Invalid search keys [" . implode(", ", $invalidSearchKeys) . "]" .
             "provided as extra search terms. Only [" . implode(", ", $validSearchKeys) . "] allowed");
         }
