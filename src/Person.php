@@ -107,7 +107,7 @@ class Person
         );
         $resp = static::parse($resp);
 
-        if (array_key_exists("StatusCode", $resp) && $resp["StatusCode"] == "404") {
+        if (array_key_exists("StatusCode", $resp) === true && $resp["StatusCode"] === "404") {
             return null;
         } else {
             $person = new static();
@@ -133,7 +133,7 @@ class Person
         $validIdentifierKeys = [
             "uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"
         ];
-        if (!in_array($identifierKey, $validIdentifierKeys)) {
+        if (in_array($identifierKey, $validIdentifierKeys) === false) {
             throw new \Exception(
                 "Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "]."
             );
@@ -144,7 +144,7 @@ class Person
         );
         $resp = static::parse($resp);
 
-        if (!array_key_exists("Persons", $resp) || sizeof($resp["Persons"]) == 0) {
+        if (array_key_exists("Persons", $resp) === false || sizeof($resp["Persons"]) === 0) {
             return null;
         } else {
             $uwnetid = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
@@ -179,7 +179,7 @@ class Person
         $person->affiliations = $attrs["EduPersonAffiliations"];
 
         foreach ($attrs as $key => $value) {
-            if (is_string($value) || is_null($value) || is_bool($value)) {
+            if (is_string($value) === true || is_bool($value) === true || $value === null) {
                 $person->setAttr($key, $value);
             }
         }
@@ -197,7 +197,7 @@ class Person
         $requiredConstants = ["UW_WS_BASE_PATH", "UW_WS_SSL_KEY_PATH", "UW_WS_SSL_CERT_PATH", "UW_WS_SSL_KEY_PASSWD"];
 
         foreach ($requiredConstants as $constant) {
-            if (!defined($constant)) {
+            if (defined($constant) === false) {
                 throw new \Exception("You must define the constant $constant before using this library.");
             }
         }
@@ -215,7 +215,7 @@ class Person
      */
     protected static function getPersonConnection()
     {
-        if (!static::$personConnection) {
+        if (static::$personConnection === null) {
             static::$personConnection = static::makeConnection("identity/v1/");
         }
         return static::$personConnection;
@@ -226,7 +226,7 @@ class Person
      */
     protected static function getStudentConnection()
     {
-        if (!static::$studentConnection) {
+        if (static::$studentConnection === null) {
             static::$studentConnection = static::makeConnection("student/v5/");
         }
         return static::$studentConnection;
