@@ -77,20 +77,23 @@ class Student extends Person
      */
     protected static function fromSimpleIdentifier($identifier)
     {
-
         $person = parent::fromSimpleIdentifier($identifier);
 
-        $uwregid = $person->getAttr("UWRegID");
+        if ($person !== null) {
+            $uwregid = $person->getAttr("UWRegID");
 
-        $resp = static::getStudentConnection()->execGET(
-            "person/$uwregid.json"
-        );
+            $resp = static::getStudentConnection()->execGET(
+                "person/$uwregid.json"
+            );
 
-        $resp = static::parse($resp);
+            $resp = static::parse($resp);
 
-        $person->attrs = array_merge($person->attrs, $resp);
+            $person->attrs = array_merge($person->attrs, $resp);
 
-        return $person;
+            return $person;
+        } else {
+            return null;
+        }
     }
 
     /**
