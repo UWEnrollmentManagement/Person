@@ -20,6 +20,12 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $p->getAttr("PublishInDirectory"));
     }
 
+    public function testNoSuchUser()
+    {
+        $student = MockStudent::fromUWRegID('nosuchuser');
+        $this->assertNull($student);
+    }
+
     public function testFromStudentNumber()
     {
         $p = MockStudent::fromStudentNumber("1033334");
