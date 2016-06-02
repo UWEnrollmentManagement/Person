@@ -126,12 +126,13 @@ class Student extends Person
      */
     protected static function fill(Person $person, array $attrs)
     {
-
-        $attrs = array_merge(
-            $attrs,
-            $attrs["PersonAffiliations"]["StudentPersonAffiliation"],
-            $attrs["PersonAffiliations"]["StudentPersonAffiliation"]["StudentWhitePages"]
-        );
+        if (array_key_exists('StudentPersonAffiliation', $attrs["PersonAffiliations"]) === true) {
+            $attrs = array_merge(
+                $attrs,
+                $attrs["PersonAffiliations"]["StudentPersonAffiliation"],
+                $attrs["PersonAffiliations"]["StudentPersonAffiliation"]["StudentWhitePages"]
+            );
+        }
 
         $student = parent::fill($person, $attrs);
 
