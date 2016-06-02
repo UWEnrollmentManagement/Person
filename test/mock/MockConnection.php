@@ -2,7 +2,6 @@
 
 namespace UWDOEM\Person\Test;
 
-
 class MockConnection extends \UWDOEM\Connection\Test\MockConnection
 {
     protected function makeSlug($url)
@@ -22,5 +21,4 @@ class MockConnection extends \UWDOEM\Connection\Test\MockConnection
 
         return $url;
     }
-
 }

@@ -107,14 +107,10 @@ class Student extends Person
         $resp = static::getStudentConnection()->execGET(
             "person.json?$identifierKey=$identifierValue"
         );
-        print_r("person.json?$identifierKey=$identifierValue");
-//        print_r($resp);
         $resp = static::parse($resp);
 
-        print_r($resp);
-
         if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
-            if ($student == null) {
+            if ($student === null) {
                 $student = new Student();
             }
             $student->attrs = array_merge($student->attrs, $resp["Persons"][0]);
