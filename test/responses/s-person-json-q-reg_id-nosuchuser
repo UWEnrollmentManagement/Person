@@ -1,0 +1,20 @@
+{
+  "Current": {
+    "Href": "\/student\/v5\/person.json?reg_id=&net_id=javeradsfage&student_number=&employee_id=&student_system_key=",
+    "EmployeeID": null,
+    "NetID": "nosuchuser",
+    "PageSize": "10",
+    "PageStart": "1",
+    "RegID": null,
+    "StudentNumber": null,
+    "StudentSystemKey": null
+  },
+  "Next": null,
+  "PageSize": "10",
+  "PageStart": "1",
+  "Persons": [
+
+  ],
+  "Previous": null,
+  "TotalCount": 0
+}

@@ -1,0 +1,69 @@
+{
+  "Current": {
+    "Href": "\/student\/v5\/person.json?reg_id=&net_id=&student_number=1033334&employee_id=&student_system_key=",
+    "EmployeeID": null,
+    "NetID": null,
+    "PageSize": "10",
+    "PageStart": "1",
+    "RegID": null,
+    "StudentNumber": "1033334",
+    "StudentSystemKey": null
+  },
+  "Next": null,
+  "PageSize": "10",
+  "PageStart": "1",
+  "Persons": [
+    {
+      "BirthDate": "1956-04-05",
+      "DirectoryRelease": false,
+      "Email": "",
+      "EmployeeID": "123456789",
+      "FirstName": "JAMES AVERAGE",
+      "Gender": "M",
+      "LastEnrolled": {
+        "Href": "\/student\/v5\/term\/2012,winter.json",
+        "Quarter": "winter",
+        "Year": 2012
+      },
+      "LastName": "STUDENT",
+      "LocalAddress": {
+        "City": "SEATTLE",
+        "Country": "",
+        "Line1": "JAMES AVERAGE",
+        "Line2": "UW TOWER O-3 BOX 359565",
+        "PostalCode": "",
+        "State": "WA",
+        "Zip": "98195"
+      },
+      "LocalPhone": "2065555555",
+      "PermanentAddress": {
+        "City": "SEATTLE",
+        "Country": "",
+        "Line1": "C\/O BILL SHIREY",
+        "Line2": "UW TOWER O-3 BOX 359565",
+        "PostalCode": "",
+        "State": "WA",
+        "Zip": "98195"
+      },
+      "PermanentPhone": "2065555555",
+      "RegID": "9136CCB8F66711D5BE060004AC494FFE",
+      "Resident": null,
+      "StudentName": "Student,James Average",
+      "StudentNumber": "1033334",
+      "StudentSystemKey": "000083856",
+      "TestScore": {
+        "Href": "\/student\/v5\/testscore\/9136CCB8F66711D5BE060004AC494FFE.json",
+        "RegID": "9136CCB8F66711D5BE060004AC494FFE"
+      },
+      "UWNetID": "javerage",
+      "Veteran": {
+        "Code": "0",
+        "Description": null
+      },
+      "VisaType": null,
+      "Href": "\/student\/v5\/person\/9136CCB8F66711D5BE060004AC494FFE.json"
+    }
+  ],
+  "Previous": null,
+  "TotalCount": 1
+}

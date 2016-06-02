@@ -76,4 +76,10 @@ class StudentTest extends PHPUnit_Framework_TestCase
         $p = MockStudent::fromStudentNumber("1033334");
         $registrations = $p->registrationSearch("2000", "summer", ["not-a-search-key" => "search-value"]);
     }
+    
+    public function testRetrieveStudentWithoutPWS()
+    {
+        $p = MockStudent::fromUWRegID("00000000000000000000000000");
+        $this->assertEquals("2065555555", $p->getAttr("PermanentPhone"));
+    }
 }

@@ -10,8 +10,6 @@ namespace UWDOEM\Person;
  *                             Queries PWS/SWS to generate a Student, given a UWNetID.
  * @method static null|Student fromUWRegID() fromUWRegID(string $uwregid)
  *                             Queries PWS/SWS to generate a Student, given a UWRegID.
- * @method static null|Student fromIdentifier() fromIdentifier(string $identifierKey, string $identifierValue)
- *                             Queries PWS/SWS to generate a Person, given an identifier type and value.
  *
  * @package UWDOEM\Person
  */
@@ -50,7 +48,7 @@ class Student extends Person
         $invalidSearchKeys = array_diff(array_keys($extraSearchTerms), $validSearchKeys);
         if ($invalidSearchKeys !== []) {
             throw new \Exception("Invalid search keys [" . implode(", ", $invalidSearchKeys) . "]" .
-            "provided as extra search terms. Only [" . implode(", ", $validSearchKeys) . "] allowed");
+                "provided as extra search terms. Only [" . implode(", ", $validSearchKeys) . "] allowed");
         }
 
         $defaultSearchTerms = [
@@ -72,28 +70,57 @@ class Student extends Person
     }
 
     /**
-     * @param string $identifier
+     * @param string $identifierKey
+     * @param string $identifierValue
      * @return null|Student
+     * @throws \Exception If $identifierKey is not one of ["uwregid", "uwnetid", "employee_id",
+     *                                                     "student_number", "student_system_key"].
      */
-    protected static function fromSimpleIdentifier($identifier)
+    public static function fromIdentifier($identifierKey, $identifierValue)
     {
-        $person = parent::fromSimpleIdentifier($identifier);
+        /** @var null|Person $student */
+        $student = parent::fromIdentifier($identifierKey, $identifierValue);
 
-        if ($person !== null) {
-            $uwregid = $person->getAttr("UWRegID");
+        /** @var string[] $personKeyToStudentKey */
+        $personKeyToStudentKey = [
+            "uwregid" => "reg_id",
+            "uwnetid" => "net_id",
+            "student_number" => "student_number",
+            "employee_id" => "employee_id",
+            "student_system_key" => "student_system_key",
+        ];
 
-            $resp = static::getStudentConnection()->execGET(
-                "person/$uwregid.json"
+        /** @var string[] $validIdentifierKeys */
+        $validIdentifierKeys = array_keys($personKeyToStudentKey);
+
+        /** @var boolean $identifierKeyIsValid */
+        $identifierKeyIsValid = in_array($identifierKey, $validIdentifierKeys);
+
+        if ($identifierKeyIsValid === false) {
+            throw new \Exception(
+                "Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "]."
             );
-
-            $resp = static::parse($resp);
-
-            $person->attrs = array_merge($person->attrs, $resp);
-
-            return $person;
-        } else {
-            return null;
         }
+
+        $identifierKey = $personKeyToStudentKey[$identifierKey];
+
+        $resp = static::getStudentConnection()->execGET(
+            "person.json?$identifierKey=$identifierValue"
+        );
+        print_r("person.json?$identifierKey=$identifierValue");
+//        print_r($resp);
+        $resp = static::parse($resp);
+
+        print_r($resp);
+
+        if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
+            if ($student == null) {
+                $student = new Student();
+            }
+            $student->attrs = array_merge($student->attrs, $resp["Persons"][0]);
+        }
+
+        return $student;
     }
 
     /**

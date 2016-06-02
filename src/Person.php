@@ -82,7 +82,7 @@ class Person
      */
     public static function fromUWNetID($uwnetid)
     {
-        return static::fromSimpleIdentifier($uwnetid);
+        return static::fromIdentifier("uwnetid", $uwnetid);
     }
 
     /**
@@ -93,26 +93,7 @@ class Person
      */
     public static function fromUWRegID($uwregid)
     {
-        return static::fromSimpleIdentifier($uwregid);
-    }
-
-    /**
-     * @param string $identifier
-     * @return null|Person
-     */
-    protected static function fromSimpleIdentifier($identifier)
-    {
-        $resp = static::getPersonConnection()->execGET(
-            "person/$identifier/full.json"
-        );
-        $resp = static::parse($resp);
-
-        if (array_key_exists("StatusCode", $resp) === true && $resp["StatusCode"] === "404") {
-            return null;
-        } else {
-            $person = new static();
-            return static::fill($person, $resp);
-        }
+        return static::fromIdentifier("uwregid", $uwregid);
     }
 
     /**
@@ -130,26 +111,58 @@ class Person
      */
     public static function fromIdentifier($identifierKey, $identifierValue)
     {
+        /** @var null|Person $person */
+        $person = null;
+
+        /** @var string $simpleIdentifier */
+        $simpleIdentifier = "";
+
+        /** @var string[] $validIdentifierKeys */
         $validIdentifierKeys = [
             "uwregid", "uwnetid", "employee_id", "student_number", "student_system_key", "development_id"
         ];
-        if (in_array($identifierKey, $validIdentifierKeys) === false) {
+
+        /** @var string[] $simpleIdentifierKeys */
+        $simpleIdentifierKeys = ["uwregid", "uwnetid"];
+
+        /** @var boolean $identifierKeyIsValid */
+        $identifierKeyIsValid = in_array($identifierKey, $validIdentifierKeys);
+
+        /** @var boolean $identifierKeyIsSimple */
+        $identifierKeyIsSimple = in_array($identifierKey, $simpleIdentifierKeys);
+
+        if ($identifierKeyIsValid === false) {
             throw new \Exception(
                 "Identifier key '$identifierKey' must be one of [" . implode(", ", $validIdentifierKeys) . "]."
             );
         }
 
-        $resp = static::getPersonConnection()->execGET(
-            "person.json?$identifierKey=$identifierValue"
-        );
-        $resp = static::parse($resp);
-
-        if (array_key_exists("Persons", $resp) === false || sizeof($resp["Persons"]) === 0) {
-            return null;
+        if ($identifierKeyIsSimple === true) {
+            $simpleIdentifier = $identifierValue;
         } else {
-            $uwnetid = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
-            return static::fromSimpleIdentifier($uwnetid);
+            $resp = static::getPersonConnection()->execGET(
+                "person.json?$identifierKey=$identifierValue"
+            );
+            $resp = static::parse($resp);
+
+            if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
+                $simpleIdentifier = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
+            }
         }
+
+        if ($simpleIdentifier !== "") {
+            $resp = static::getPersonConnection()->execGET(
+                "person/$simpleIdentifier/full.json"
+            );
+            $resp = static::parse($resp);
+
+            if (array_key_exists("UWRegID", $resp) === true) {
+                $person = new static();
+                $person = static::fill($person, $resp);
+            }
+        }
+
+        return $person;
     }
 
     /**
