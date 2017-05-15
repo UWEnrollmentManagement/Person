@@ -219,7 +219,8 @@ class Person
             UW_WS_BASE_PATH . $baseUrl,
             UW_WS_SSL_KEY_PATH,
             UW_WS_SSL_CERT_PATH,
-            UW_WS_SSL_KEY_PASSWD
+            UW_WS_SSL_KEY_PASSWD,
+            defined(UW_WS_VERBOSE) && UW_WS_VERBOSE
         );
     }
 
