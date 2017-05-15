@@ -16,6 +16,7 @@ For example:
     define('UW_WS_SSL_KEY_PATH', '/path/to/my/private.key');
     define('UW_WS_SSL_CERT_PATH', '/path/to/my/public_cert.pem');
     define('UW_WS_SSL_KEY_PASSWD', 'myprivatekeypassword');  // Can be blank for no password: ''
+    define('UW_WS_VERBOSE', false);  // (Optional) Whether to include verbose cURL messages in error messages.
     
     /* Query the web services */
     $student = Student::fromStudentNumber("1033334");
@@ -77,6 +78,7 @@ Before querying the web services, you must first initialize the connection by ca
     define('UW_WS_SSL_KEY_PATH', '/path/to/my/private.key');
     define('UW_WS_SSL_CERT_PATH', '/path/to/my/public_cert.pem');
     define('UW_WS_SSL_KEY_PASSWD', 'myprivatekeypassword');  // Can be blank for no password: ''
+    define('UW_WS_VERBOSE', false);  // (Optional) Whether to include verbose cURL messages in error messages.
 ```
 
 The terms `UW_WS_SSL_KEY_PATH` and `UW_WS_SSL_CERT_PATH` correspond to the absolute locations of your private key and university-signed certificate. The `UW_WS_SSL_KEY_PASSWD` corresponds to the string which unlocks your private key; if your key does not have a password then use a blank string, eg: `''`.
