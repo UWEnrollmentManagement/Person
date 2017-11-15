@@ -66,7 +66,7 @@ class Student extends Person
             "registration.json?" . http_build_query($searchTerms)
         );
 
-        return static::parse($resp)["Registrations"];
+        return static::parse($resp->getData())["Registrations"];
     }
 
     /**
@@ -107,7 +107,7 @@ class Student extends Person
         $resp = static::getStudentConnection()->execGET(
             "person.json?$identifierKey=$identifierValue"
         );
-        $resp = static::parse($resp);
+        $resp = static::parse($resp->getData());
 
         if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
             if ($student === null) {

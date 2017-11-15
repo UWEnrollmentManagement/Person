@@ -143,7 +143,7 @@ class Person
             $resp = static::getPersonConnection()->execGET(
                 "person.json?$identifierKey=$identifierValue"
             );
-            $resp = static::parse($resp);
+            $resp = static::parse($resp->getData());
 
             if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
                 $simpleIdentifier = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
@@ -154,7 +154,7 @@ class Person
             $resp = static::getPersonConnection()->execGET(
                 "person/$simpleIdentifier/full.json"
             );
-            $resp = static::parse($resp);
+            $resp = static::parse($resp->getData());
 
             if (array_key_exists("UWRegID", $resp) === true) {
                 $person = new static();
@@ -215,12 +215,15 @@ class Person
             }
         }
 
+        $user = $_SERVER['REMOTE_USER'];
+
         return new Connection(
             UW_WS_BASE_PATH . $baseUrl,
             UW_WS_SSL_KEY_PATH,
             UW_WS_SSL_CERT_PATH,
             UW_WS_SSL_KEY_PASSWD,
-            defined("UW_WS_VERBOSE") && UW_WS_VERBOSE
+            defined("UW_WS_VERBOSE") && UW_WS_VERBOSE,
+            [CURLOPT_HTTPHEADER => ["X-UW-ACT-AS: $user"]]
         );
     }
 

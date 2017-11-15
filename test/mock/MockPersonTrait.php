@@ -9,7 +9,7 @@ trait MockPersonTrait
         return new MockConnection(
             $baseUrl,
             getcwd() . "",
-            getcwd() . "/test/test-certs/self.signed.test.certs.crt",
+            getcwd() . "/test-certs/self.signed.test.certs.crt",
             $baseUrl
         );
     }

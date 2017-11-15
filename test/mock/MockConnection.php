@@ -2,7 +2,9 @@
 
 namespace UWDOEM\Person\Test;
 
-class MockConnection extends \UWDOEM\Connection\Test\MockConnection
+use UWDOEM\Connection\Connection;
+
+class MockConnection extends Connection
 {
     protected function makeSlug($url)
     {
@@ -20,5 +22,13 @@ class MockConnection extends \UWDOEM\Connection\Test\MockConnection
         }
 
         return $url;
+    }
+
+    protected function doExec()
+    {
+        $url = curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL);
+        $info = curl_getinfo($this->curl);
+        $data = file_get_contents(getcwd() . "/responses/{$this->makeSlug($url)}");
+        return new \UWDOEM\Connection\ConnectionReturn($data, $info);
     }
 }
