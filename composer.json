@@ -1,6 +1,13 @@
 {
   "name": "uwdoem/person",
   "description": "Client library for the University of Washington Person and Student Web Services",
+  "authors": [
+      {
+          "name": "Elizabeth Williams",
+          "email": "wizzah@gmail.com",
+          "role": "Developer"
+      }
+  ],
   "autoload": {
     "classmap": [
       "src/"
