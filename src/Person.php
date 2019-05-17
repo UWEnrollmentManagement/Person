@@ -146,7 +146,11 @@ class Person
             $resp = static::parse($resp->getData());
 
             if (array_key_exists("Persons", $resp) === true && sizeof($resp["Persons"]) > 0) {
-                $simpleIdentifier = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
+                if ($resp["Persons"][0]["PersonFullURI"]["UWNetID"]) {
+					$simpleIdentifier = $resp["Persons"][0]["PersonFullURI"]["UWNetID"];
+				} else {
+					$simpleIdentifier = $resp["Persons"][0]["PersonFullURI"]["UWRegID"];
+				}
             }
         }
 
