@@ -237,7 +237,7 @@ class Person
     protected static function getPersonConnection()
     {
         if (static::$personConnection === null) {
-            static::$personConnection = static::makeConnection("identity/v1/");
+            static::$personConnection = static::makeConnection("identity/v2/");
         }
         return static::$personConnection;
     }
